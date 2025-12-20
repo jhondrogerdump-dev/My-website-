@@ -17,6 +17,14 @@
       font-family: Arial, sans-serif;
       color: white;
       overflow: hidden;
+      position: relative;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
 
     .container {
@@ -65,7 +73,7 @@
       font-weight: bold;
     }
 
-    /* PANEL */
+    /* PANELS */
     .panel {
       display: none;
       position: absolute;
@@ -75,6 +83,7 @@
       background: linear-gradient(180deg, #1a0707, #0b0505);
       box-shadow: 0 0 50px rgba(255, 80, 0, 0.9);
       text-align: center;
+      z-index: 2;
     }
 
     .panel-header {
@@ -126,20 +135,51 @@
       border: 2px solid #ff6a00;
       color: white;
     }
+
+    /* NOTIFICATION */
+    .notification {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(45deg, #ff0000, #ff6a00);
+      color: black;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 0 25px #ff4500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      z-index: 10;
+    }
+
+    .notification.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 
 <body>
 
+  <!-- PARTICLES CANVAS -->
+  <canvas id="particles"></canvas>
+
+  <!-- NOTIFICATION -->
+  <div id="notif" class="notification">Script copied!</div>
+
   <!-- MAIN SCREEN -->
   <div class="container" id="home">
     <img src="standard (10).gif" class="logo">
     <h1>XENA HUB</h1>
-    <button class="btn primary" onclick="openPanel()">CONTINUE</button>
+    <button class="btn primary" onclick="openPanel('fireworks')">CONTINUE</button>
+    <a class="btn" href="https://discord.gg/55Cc5bYS6T" target="_blank">DISCORD</a>
+    <button class="btn primary" onclick="openPanel('piggy')">XENA HUB PIGGY SCRIPT</button>
   </div>
 
-  <!-- PANEL SCREEN -->
-  <div class="panel" id="panel">
+  <!-- PANEL 1: Fireworks Playground -->
+  <div class="panel" id="fireworks">
     <div class="panel-header">
       <img src="fireworks.png">
       <div>
@@ -147,26 +187,81 @@
         <div class="beta">Beta</div>
       </div>
     </div>
-
     <div class="online">● ONLINE</div>
-
-    <button class="panel-btn copy" onclick="copyScript()">COPY SCRIPT</button>
-
+    <button class="panel-btn copy" onclick="copyScript('Fireworks Playground Script')">COPY SCRIPT</button>
     <a href="https://discord.gg/55Cc5bYS6T" target="_blank">
       <button class="panel-btn discord">JOIN DISCORD</button>
     </a>
   </div>
 
+  <!-- PANEL 2: Xena Hub Piggy Script -->
+  <div class="panel" id="piggy">
+    <div class="panel-header">
+      <img src="piggy.png">
+      <div>
+        <div class="title">Xena Hub Piggy Script</div>
+        <div class="beta">Beta</div>
+      </div>
+    </div>
+    <div class="online">● ONLINE</div>
+    <button class="panel-btn copy" onclick="copyScript('Xena Hub Piggy Script')">COPY SCRIPT</button>
+  </div>
+
   <script>
-    function openPanel() {
-      document.getElementById("home").style.display = "none";
-      document.getElementById("panel").style.display = "block";
+    // Show panel function
+    function openPanel(panelId) {
+      document.getElementById(panelId).style.display = "block";
     }
 
-    function copyScript() {
-      navigator.clipboard.writeText("-- Fireworks Playground Script");
-      alert("Script copied!");
+    // Copy script function with notification
+    function copyScript(text) {
+      navigator.clipboard.writeText("-- " + text);
+
+      const notif = document.getElementById("notif");
+      notif.textContent = "Script copied!";
+      notif.classList.add("show");
+      setTimeout(() => {
+        notif.classList.remove("show");
+      }, 2000);
     }
+
+    // RED PARTICLES BACKGROUND
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    for (let i = 0; i < 80; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(255, 0, 0, 0.8)";
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.onresize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
   </script>
 
 </body>
