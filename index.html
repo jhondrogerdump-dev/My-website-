@@ -110,7 +110,7 @@
       color: #ff0000;
     }
 
-    .online {
+    .status {
       margin: 10px 0;
       color: #ff4500;
     }
@@ -187,29 +187,29 @@
         <div class="beta">Beta</div>
       </div>
     </div>
-    <div class="online">● ONLINE</div>
+    <div class="status">● ONLINE</div>
     <button class="panel-btn copy" onclick="copyScript('Fireworks Playground Script')">COPY SCRIPT</button>
     <a href="https://discord.gg/55Cc5bYS6T" target="_blank">
       <button class="panel-btn discord">JOIN DISCORD</button>
     </a>
   </div>
 
-  <!-- PANEL 2: Xena Hub Piggy Script -->
+  <!-- PANEL 2: Piggy Script -->
   <div class="panel" id="piggy" style="top: 460px;">
     <div class="panel-header">
       <img src="piggy.png">
       <div>
-        <div class="title">Xena Hub Piggy Script</div>
-        <div class="beta">Beta</div>
+        <div class="title">Piggy Script</div>
       </div>
     </div>
-    <div class="online">● ONLINE</div>
-    <button class="panel-btn copy" onclick="copyScript('Xena Hub Piggy Script')">COPY SCRIPT</button>
+    <div class="status">● UPDATING</div>
+    <button class="panel-btn copy" onclick="copyScript('Piggy Script')">COPY SCRIPT</button>
   </div>
 
   <script>
-    // Show both panels
+    // Show panels and hide main screen
     function openPanels() {
+      document.getElementById('home').style.display = 'none';
       document.getElementById('fireworks').style.display = 'block';
       document.getElementById('piggy').style.display = 'block';
     }
