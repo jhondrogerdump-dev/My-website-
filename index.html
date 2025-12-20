@@ -2,7 +2,18 @@
 <html>
 <head>
   <title>Xena Hub</title>
+
+  <!-- IMPORT ORBITRON BLACK FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+
   <style>
+
+    /* APPLY ORBITRON BLACK EVERYWHERE */
+    * {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900; /* very bold / black */
+    }
+
     body {
       margin: 0;
       height: 100vh;
@@ -15,8 +26,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-family: Arial, sans-serif;
-      font-weight: bold;
       color: white;
       overflow: hidden;
       position: relative;
@@ -43,13 +52,9 @@
     h1 {
       margin-top: 20px;
       font-size: 44px;
-      letter-spacing: 5px;
+      letter-spacing: 4px;
       color: #ff4500;
-      text-shadow:
-        0 0 10px #ff0000,
-        0 0 30px #ff6a00,
-        0 0 60px #ff4500;
-      font-weight: bold;
+      text-shadow: 0 0 10px #ff0000, 0 0 30px #ff6a00;
     }
 
     .btn {
@@ -62,7 +67,6 @@
       font-size: 16px;
       cursor: pointer;
       transition: 0.25s;
-      font-weight: bold;
     }
 
     .btn:hover {
@@ -74,10 +78,8 @@
       background: linear-gradient(45deg, #ff0000, #ff6a00);
       border: none;
       color: black;
-      font-weight: bold;
     }
 
-    /* PANELS */
     .panel {
       display: none;
       position: absolute;
@@ -88,7 +90,6 @@
       box-shadow: 0 0 50px rgba(255, 80, 0, 0.9);
       text-align: center;
       z-index: 2;
-      font-weight: bold;
     }
 
     .panel-header {
@@ -104,23 +105,11 @@
       border-radius: 12px;
     }
 
-    .title {
-      font-size: 18px;
-      font-weight: bold;
-      color: #ff6a00;
-    }
+    .title { font-size: 18px; color: #ff6a00; }
+    .beta { font-size: 12px; color: #ff0000; }
 
-    .beta {
-      font-size: 12px;
-      color: #ff0000;
-    }
+    .status { margin: 10px 0; }
 
-    .status {
-      margin: 10px 0;
-      font-weight: bold;
-    }
-
-    /* Status colors */
     #fireworks .status { color: #00ff00; }
     #piggy .status { color: #ffff00; }
 
@@ -132,7 +121,6 @@
       border: none;
       font-size: 15px;
       cursor: pointer;
-      font-weight: bold;
     }
 
     .copy {
@@ -151,38 +139,17 @@
       padding: 20px;
       border-radius: 25px;
       background: linear-gradient(180deg, #ff4500, #ff0000);
-      border: 2px solid #ff0000;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6);
       color: white;
-      z-index: 2;
       text-align: left;
       font-size: 16px;
-      line-height: 1.5;
       margin-top: 30px;
-      position: relative;
       animation: pulse 2s infinite alternate;
-      font-weight: bold;
-    }
-
-    .textbox h2 {
-      font-size: 20px;
-      color: #ff6a00;
-      margin-bottom: 10px;
-      text-align: center;
-      text-shadow: 0 0 8px #ff0000, 0 0 20px #ff6a00;
-      font-weight: bold;
     }
 
     @keyframes pulse {
-      0% {
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6);
-      }
-      50% {
-        box-shadow: 0 0 30px rgba(255, 50, 0, 0.9), 0 0 60px rgba(255, 150, 0, 0.7);
-      }
-      100% {
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6);
-      }
+      0% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6); }
+      50% { box-shadow: 0 0 30px rgba(255, 50, 0, 0.9), 0 0 60px rgba(255, 150, 0, 0.7); }
+      100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6); }
     }
 
     .notification {
@@ -194,33 +161,27 @@
       color: black;
       padding: 12px 24px;
       border-radius: 25px;
-      font-weight: bold;
       box-shadow: 0 0 25px #ff4500;
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition: opacity 0.4s ease;
       z-index: 10;
     }
 
     .notification.show {
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
     }
+
   </style>
 </head>
 
 <body>
-
-  <!-- PARTICLES CANVAS -->
   <canvas id="particles"></canvas>
-
-  <!-- NOTIFICATION -->
   <div id="notif" class="notification">Script copied!</div>
 
-  <!-- MAIN SCREEN -->
   <div class="container" id="home">
     <img src="standard (10).gif" class="logo">
     <h1>XENA HUB</h1>
+
     <button class="btn primary" onclick="openPanels()">CONTINUE</button>
     <a class="btn" href="https://discord.gg/55Cc5bYS6T" target="_blank">DISCORD</a>
 
@@ -233,13 +194,12 @@
     </div>
   </div>
 
-  <!-- PANEL 1: Fireworks Playground -->
-  <div class="panel" id="fireworks" style="top: 100px;">
+  <!-- FIREWORKS -->
+  <div class="panel" id="fireworks" style="top:100px;">
     <div class="panel-header">
-      <img src="Screenshot_20251220_145217_com.roblox.client_edit_107002055564400.jpg" alt="Fireworks Logo">
+      <img src="Screenshot_20251220_145217_com.roblox.client_edit_107002055564400.jpg">
       <div>
-        <div class="title">Fireworks Playground</div>
-        <div class="beta">Beta</div>
+        <div class="title">Fireworks Playground</div><div class="beta">Beta</div>
       </div>
     </div>
     <div class="status">● ONLINE</div>
@@ -249,13 +209,11 @@
     </a>
   </div>
 
-  <!-- PANEL 2: Piggy Script -->
-  <div class="panel" id="piggy" style="top: 460px;">
+  <!-- PIGGY -->
+  <div class="panel" id="piggy" style="top:460px;">
     <div class="panel-header">
-      <img src="Screenshot_20251220_145207_com.roblox.client_edit_107032225822728.jpg" alt="Piggy Logo">
-      <div>
-        <div class="title">Piggy Script</div>
-      </div>
+      <img src="Screenshot_20251220_145207_com.roblox.client_edit_107032225822728.jpg">
+      <div><div class="title">Piggy Script</div></div>
     </div>
     <div class="status">● UPDATING</div>
     <button class="panel-btn copy" onclick="copyScript('piggy')">COPY SCRIPT</button>
@@ -272,57 +230,16 @@
       let text = "";
       if (panel === "fireworks") {
         text = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()';
-      } else if (panel === "piggy") {
+      } else {
         text = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()';
       }
-
       navigator.clipboard.writeText(text);
 
       const notif = document.getElementById("notif");
-      notif.textContent = "Script copied!";
       notif.classList.add("show");
-      setTimeout(() => {
-        notif.classList.remove("show");
-      }, 2000);
+      setTimeout(() => notif.classList.remove("show"), 2000);
     }
-
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles = [];
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 2 + 1,
-        dx: (Math.random() - 0.5) * 0.5,
-        dy: (Math.random() - 0.5) * 0.5
-      });
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(255, 0, 0, 0.8)";
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-        p.x += p.dx;
-        p.y += p.dy;
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-      });
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    window.onresize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
   </script>
 
 </body>
-</html>
+</html> 
