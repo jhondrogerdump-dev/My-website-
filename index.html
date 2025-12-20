@@ -84,6 +84,7 @@
       box-shadow: 0 0 50px rgba(255, 80, 0, 0.9);
       text-align: center;
       z-index: 2;
+      top: 100px;
     }
 
     .panel-header {
@@ -173,9 +174,8 @@
   <div class="container" id="home">
     <img src="standard (10).gif" class="logo">
     <h1>XENA HUB</h1>
-    <button class="btn primary" onclick="openPanel('fireworks')">CONTINUE</button>
+    <button class="btn primary" onclick="openPanels()">CONTINUE</button>
     <a class="btn" href="https://discord.gg/55Cc5bYS6T" target="_blank">DISCORD</a>
-    <button class="btn primary" onclick="openPanel('piggy')">XENA HUB PIGGY SCRIPT</button>
   </div>
 
   <!-- PANEL 1: Fireworks Playground -->
@@ -195,7 +195,7 @@
   </div>
 
   <!-- PANEL 2: Xena Hub Piggy Script -->
-  <div class="panel" id="piggy">
+  <div class="panel" id="piggy" style="top: 460px;">
     <div class="panel-header">
       <img src="piggy.png">
       <div>
@@ -208,15 +208,15 @@
   </div>
 
   <script>
-    // Show panel function
-    function openPanel(panelId) {
-      document.getElementById(panelId).style.display = "block";
+    // Show both panels
+    function openPanels() {
+      document.getElementById('fireworks').style.display = 'block';
+      document.getElementById('piggy').style.display = 'block';
     }
 
     // Copy script function with notification
     function copyScript(text) {
       navigator.clipboard.writeText("-- " + text);
-
       const notif = document.getElementById("notif");
       notif.textContent = "Script copied!";
       notif.classList.add("show");
