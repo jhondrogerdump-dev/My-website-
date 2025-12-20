@@ -139,21 +139,50 @@ h1 {
   color: white;
 }
 
-/* LOG BOX */
-.log-box {
-  display: none;
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 15px;
+/* MODERATION BOX */
+.changelog {
+  width: 360px;
+  padding: 18px;
+  margin-top: 25px;
+  border-radius: 25px;
   background: linear-gradient(180deg, #ff6a00, #ff0000);
   color: black;
-  font-size: 12px;
-  animation: popIn .35s ease;
+}
+
+/* POPUP */
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  background: linear-gradient(180deg, #1a0707, #0b0505);
+  border-radius: 20px;
+  box-shadow: 0 0 50px rgba(255,80,0,.9);
+  padding: 20px;
+  z-index: 999;
+  animation: popIn .4s ease;
+}
+
+.popup h3 {
+  color: #ff6a00;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.popup .close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
 }
 
 @keyframes popIn {
-  from { opacity:0; transform: scale(.9); }
-  to { opacity:1; transform: scale(1); }
+  from { opacity:0; transform: translate(-50%, -40%); }
+  to { opacity:1; transform: translate(-50%, -50%); }
 }
 
 /* NOTIFICATION */
@@ -195,9 +224,19 @@ h1 {
     <button class="btn primary" onclick="openPanels()">CONTINUE</button>
     <button class="discord-btn" onclick="openDiscord()">DISCORD</button>
   </div>
+
+  <div class="changelog">
+    <b>MODERATION TEAM</b><br><br>
+    Owner: shiro<br>
+    Admin: shiro<br>
+    Developers: shiro, Azairo, kiro<br>
+    Head Staff: kiro<br>
+    Staff: kiro<br>
+    Trial Staff: none
+  </div>
 </div>
 
-<!-- FIREWORKS -->
+<!-- FIREWORKS PANEL -->
 <div class="panel" id="fireworks" style="top:80px;">
   <div class="panel-header">
     <img src="Screenshot_20251220_145217_com.roblox.client_edit_107002055564400.jpg">
@@ -210,16 +249,11 @@ h1 {
 
   <div class="panel-buttons">
     <button class="panel-btn copy" onclick="copyScript('fireworks')">COPY SCRIPT</button>
-    <button class="panel-btn log-btn" onclick="toggleLog('fwlog')">CHANGELOG</button>
-  </div>
-
-  <div class="log-box" id="fwlog">
-    • New aesthetic GUI<br>
-    • Improved auto collect chest
+    <button class="panel-btn log-btn" onclick="openPopup('fireworksPopup')">CHANGELOG</button>
   </div>
 </div>
 
-<!-- PIGGY -->
+<!-- PIGGY PANEL -->
 <div class="panel" id="piggy" style="top:300px;">
   <div class="panel-header">
     <img src="Screenshot_20251220_145207_com.roblox.client_edit_107032225822728.jpg">
@@ -231,14 +265,27 @@ h1 {
 
   <div class="panel-buttons">
     <button class="panel-btn copy" onclick="copyScript('piggy')">COPY SCRIPT</button>
-    <button class="panel-btn log-btn" onclick="toggleLog('piglog')">CHANGELOG</button>
+    <button class="panel-btn log-btn" onclick="openPopup('piggyPopup')">CHANGELOG</button>
   </div>
+</div>
 
-  <div class="log-box" id="piglog">
-    • Tools GUI<br>
-    • Teleport & WalkSpeed<br>
-    • Auto doors
-  </div>
+<!-- FIREWORKS POPUP -->
+<div class="popup" id="fireworksPopup">
+  <span class="close" onclick="closePopup('fireworksPopup')">&times;</span>
+  <h3>Fireworks Playground Beta</h3>
+  <p>• New more aesthetic GUI with minimize button<br>
+     • Improved auto collect chest</p>
+</div>
+
+<!-- PIGGY POPUP -->
+<div class="popup" id="piggyPopup">
+  <span class="close" onclick="closePopup('piggyPopup')">&times;</span>
+  <h3>Piggy Script v1.0</h3>
+  <p>Changelogs:<br>
+     • Tools GUI for Book 1<br>
+     • Fly and invisible script button<br>
+     • Auto spam doors open and close<br>
+     • Teleport to players and WalkSpeed</p>
 </div>
 
 <script>
@@ -255,9 +302,12 @@ function openPanels() {
   }, 400);
 }
 
-function toggleLog(id) {
-  const box = document.getElementById(id);
-  box.style.display = box.style.display === "block" ? "none" : "block";
+function openPopup(id) {
+  document.getElementById(id).style.display = "block";
+}
+
+function closePopup(id) {
+  document.getElementById(id).style.display = "none";
 }
 
 function openDiscord() {
@@ -306,4 +356,4 @@ let particles = Array.from({length:80},()=>({
 })();
 </script>
 </body>
-</html>
+</html> 
