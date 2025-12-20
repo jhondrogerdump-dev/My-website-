@@ -39,13 +39,23 @@ h1 {
   letter-spacing: 4px;
 }
 
-.btn {
+/* BUTTONS */
+.btn, .panel-btn, .discord-btn {
   padding: 14px 32px;
   border-radius: 30px;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.btn:active, .panel-btn:active, .discord-btn:active {
+  transform: scale(.92);
+  box-shadow: 0 0 45px rgba(255,80,0,.9);
+}
+
+.btn {
   border: 2px solid #ff6a00;
   background: transparent;
   color: white;
-  cursor: pointer;
 }
 
 .btn.primary {
@@ -54,6 +64,19 @@ h1 {
   border: none;
 }
 
+/* DISCORD */
+.discord-btn {
+  margin-left: 12px;
+  border: 2px solid #ff6a00;
+  background: transparent;
+  color: white;
+}
+
+.discord-btn:hover {
+  box-shadow: 0 0 30px rgba(255,100,0,.8);
+}
+
+/* CHANGELOG */
 .changelog {
   width: 360px;
   padding: 18px;
@@ -63,6 +86,7 @@ h1 {
   color: black;
 }
 
+/* PANELS */
 .panel {
   display: none;
   position: absolute;
@@ -72,6 +96,12 @@ h1 {
   background: linear-gradient(180deg, #1a0707, #0b0505);
   box-shadow: 0 0 50px rgba(255,80,0,.9);
   z-index: 2;
+  animation: slideIn .6s ease;
+}
+
+@keyframes slideIn {
+  from { opacity:0; transform: translateY(40px); }
+  to { opacity:1; transform: translateY(0); }
 }
 
 .panel-header {
@@ -89,18 +119,10 @@ h1 {
 .title { color: #ff6a00; }
 .beta { font-size: 12px; color: red; }
 
-.panel-btn {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-}
-
 .copy {
   background: linear-gradient(45deg, #ff0000, #ff6a00);
   color: black;
+  border: none;
 }
 
 .log-btn {
@@ -109,6 +131,7 @@ h1 {
   color: white;
 }
 
+/* LOG BOX ANIMATION */
 .log-box {
   display: none;
   margin-top: 12px;
@@ -117,6 +140,17 @@ h1 {
   background: linear-gradient(180deg, #ff6a00, #ff0000);
   color: black;
   font-size: 12px;
+  animation: popIn .35s ease;
+}
+
+@keyframes popIn {
+  from { opacity:0; transform: scale(.9); }
+  to { opacity:1; transform: scale(1); }
+}
+
+/* HOME FADE */
+@keyframes fadeOut {
+  to { opacity:0; transform: scale(.9); }
 }
 </style>
 </head>
@@ -128,7 +162,11 @@ h1 {
 <div class="container" id="home">
   <img src="standard (10).gif" class="logo">
   <h1>XENA HUB</h1>
-  <button class="btn primary" onclick="openPanels()">CONTINUE</button>
+
+  <div>
+    <button class="btn primary" onclick="openPanels()">CONTINUE</button>
+    <button class="discord-btn" onclick="openDiscord()">DISCORD</button>
+  </div>
 
   <div class="changelog">
     <b>MODERATION TEAM</b><br><br>
@@ -182,14 +220,21 @@ h1 {
 
 <script>
 function openPanels() {
-  home.style.display = "none";
-  fireworks.style.display = "block";
-  piggy.style.display = "block";
+  home.style.animation = "fadeOut .4s ease forwards";
+  setTimeout(() => {
+    home.style.display = "none";
+    fireworks.style.display = "block";
+    piggy.style.display = "block";
+  }, 400);
 }
 
 function toggleLog(id) {
   const box = document.getElementById(id);
   box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+function openDiscord() {
+  window.open("https://discord.gg/YOURINVITELINK", "_blank");
 }
 
 function copyScript(type) {
