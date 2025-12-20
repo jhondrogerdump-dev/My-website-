@@ -12,6 +12,7 @@
         linear-gradient(90deg, rgba(255,120,0,0.15) 1px, transparent 1px);
       background-size: 40px 40px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       font-family: Arial, sans-serif;
@@ -84,7 +85,6 @@
       box-shadow: 0 0 50px rgba(255, 80, 0, 0.9);
       text-align: center;
       z-index: 2;
-      top: 100px;
     }
 
     .panel-header {
@@ -137,6 +137,44 @@
       color: white;
     }
 
+    /* GLOWING MAGMA STAFF TEXTBOX */
+    .textbox {
+      width: 360px;
+      padding: 20px;
+      border-radius: 25px;
+      background: linear-gradient(180deg, #ff4500, #ff0000); /* magma gradient */
+      border: 2px solid #ff0000; /* glowing red line */
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6); /* glow effect */
+      color: white;
+      z-index: 2;
+      text-align: left;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-top: 30px;
+      position: relative;
+      animation: pulse 2s infinite alternate; /* pulsing animation */
+    }
+
+    .textbox h2 {
+      font-size: 20px;
+      color: #ff6a00;
+      margin-bottom: 10px;
+      text-align: center;
+      text-shadow: 0 0 8px #ff0000, 0 0 20px #ff6a00; /* glowing title */
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(255, 50, 0, 0.9), 0 0 60px rgba(255, 150, 0, 0.7);
+      }
+      100% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6);
+      }
+    }
+
     /* NOTIFICATION */
     .notification {
       position: absolute;
@@ -176,10 +214,19 @@
     <h1>XENA HUB</h1>
     <button class="btn primary" onclick="openPanels()">CONTINUE</button>
     <a class="btn" href="https://discord.gg/55Cc5bYS6T" target="_blank">DISCORD</a>
+
+    <!-- STAFF TEXTBOX -->
+    <div class="textbox">
+      <h2>Moderation Team</h2>
+      Owner: Shiro<br>
+      Admin: Shiro<br>
+      Developer/Coder: Azairo, Kiro<br>
+      Staff: Kiro, Azairo
+    </div>
   </div>
 
   <!-- PANEL 1: Fireworks Playground -->
-  <div class="panel" id="fireworks">
+  <div class="panel" id="fireworks" style="top: 100px;">
     <div class="panel-header">
       <img src="fireworks.png">
       <div>
@@ -188,7 +235,7 @@
       </div>
     </div>
     <div class="status">● ONLINE</div>
-    <button class="panel-btn copy" onclick="copyScript('Fireworks Playground Script')">COPY SCRIPT</button>
+    <button class="panel-btn copy" onclick="copyScript('fireworks')">COPY SCRIPT</button>
     <a href="https://discord.gg/55Cc5bYS6T" target="_blank">
       <button class="panel-btn discord">JOIN DISCORD</button>
     </a>
@@ -203,7 +250,7 @@
       </div>
     </div>
     <div class="status">● UPDATING</div>
-    <button class="panel-btn copy" onclick="copyScript('Piggy Script')">COPY SCRIPT</button>
+    <button class="panel-btn copy" onclick="copyScript('piggy')">COPY SCRIPT</button>
   </div>
 
   <script>
@@ -214,9 +261,17 @@
       document.getElementById('piggy').style.display = 'block';
     }
 
-    // Copy script function with notification
-    function copyScript(text) {
-      navigator.clipboard.writeText("-- " + text);
+    // Copy script function with correct URLs
+    function copyScript(panel) {
+      let text = "";
+      if (panel === "fireworks") {
+        text = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()';
+      } else if (panel === "piggy") {
+        text = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()';
+      }
+
+      navigator.clipboard.writeText(text);
+
       const notif = document.getElementById("notif");
       notif.textContent = "Script copied!";
       notif.classList.add("show");
