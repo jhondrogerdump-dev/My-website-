@@ -146,7 +146,6 @@
       color: white;
     }
 
-    /* GLOWING TEXTBOX */
     .textbox {
       width: 360px;
       padding: 20px;
@@ -175,12 +174,17 @@
     }
 
     @keyframes pulse {
-      0% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6); }
-      50% { box-shadow: 0 0 30px rgba(255, 50, 0, 0.9), 0 0 60px rgba(255, 150, 0, 0.7); }
-      100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6); }
+      0% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(255, 50, 0, 0.9), 0 0 60px rgba(255, 150, 0, 0.7);
+      }
+      100% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.6);
+      }
     }
 
-    /* NOTIFICATION */
     .notification {
       position: absolute;
       top: 20px;
@@ -206,9 +210,14 @@
 </head>
 
 <body>
+
+  <!-- PARTICLES CANVAS -->
   <canvas id="particles"></canvas>
+
+  <!-- NOTIFICATION -->
   <div id="notif" class="notification">Script copied!</div>
 
+  <!-- MAIN SCREEN -->
   <div class="container" id="home">
     <img src="standard (10).gif" class="logo">
     <h1>XENA HUB</h1>
@@ -224,10 +233,10 @@
     </div>
   </div>
 
-  <!-- Panels -->
+  <!-- PANEL 1: Fireworks Playground -->
   <div class="panel" id="fireworks" style="top: 100px;">
     <div class="panel-header">
-      <img src="https://raw.githubusercontent.com/yourusername/yourrepo/main/assets/Screenshot_20251220_145217_com.roblox.client_edit_107002055564400.jpg" alt="Fireworks Icon">
+      <img src="Screenshot_20251220_145217_com.roblox.client_edit_107002055564400.jpg" alt="Fireworks Logo">
       <div>
         <div class="title">Fireworks Playground</div>
         <div class="beta">Beta</div>
@@ -240,9 +249,10 @@
     </a>
   </div>
 
+  <!-- PANEL 2: Piggy Script -->
   <div class="panel" id="piggy" style="top: 460px;">
     <div class="panel-header">
-      <img src="https://raw.githubusercontent.com/yourusername/yourrepo/main/assets/Screenshot_20251220_145207_com.roblox.client_edit_107032225822728.jpg" alt="Piggy Icon">
+      <img src="Screenshot_20251220_145207_com.roblox.client_edit_107032225822728.jpg" alt="Piggy Logo">
       <div>
         <div class="title">Piggy Script</div>
       </div>
@@ -267,10 +277,13 @@
       }
 
       navigator.clipboard.writeText(text);
+
       const notif = document.getElementById("notif");
       notif.textContent = "Script copied!";
       notif.classList.add("show");
-      setTimeout(() => notif.classList.remove("show"), 2000);
+      setTimeout(() => {
+        notif.classList.remove("show");
+      }, 2000);
     }
 
     const canvas = document.getElementById("particles");
@@ -291,7 +304,7 @@
 
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(255,0,0,0.8)";
+      ctx.fillStyle = "rgba(255, 0, 0, 0.8)";
       particles.forEach(p => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -310,5 +323,6 @@
       canvas.height = window.innerHeight;
     };
   </script>
+
 </body>
 </html>
