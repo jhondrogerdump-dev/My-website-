@@ -64,7 +64,6 @@ h1 {
   border: none;
 }
 
-/* DISCORD */
 .discord-btn {
   margin-left: 12px;
   border: 2px solid #ff6a00;
@@ -131,7 +130,7 @@ h1 {
   color: white;
 }
 
-/* LOG BOX ANIMATION */
+/* LOG BOX */
 .log-box {
   display: none;
   margin-top: 12px;
@@ -148,7 +147,26 @@ h1 {
   to { opacity:1; transform: scale(1); }
 }
 
-/* HOME FADE */
+/* NOTIFICATION */
+#notify {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(45deg, #ff0000, #ff6a00);
+  color: black;
+  padding: 14px 26px;
+  border-radius: 30px;
+  display: none;
+  animation: notifyIn .35s ease;
+  z-index: 999;
+}
+
+@keyframes notifyIn {
+  from { opacity:0; transform: translate(-50%, 20px); }
+  to { opacity:1; transform: translate(-50%, 0); }
+}
+
 @keyframes fadeOut {
   to { opacity:0; transform: scale(.9); }
 }
@@ -157,6 +175,8 @@ h1 {
 
 <body>
 <canvas id="particles"></canvas>
+
+<div id="notify">Script copied!</div>
 
 <!-- HOME -->
 <div class="container" id="home">
@@ -234,15 +254,30 @@ function toggleLog(id) {
 }
 
 function openDiscord() {
-  window.open("https://discord.gg/YOURINVITELINK", "_blank");
+  window.open("https://discord.gg/55Cc5bYS6T", "_blank");
 }
 
+/* CLIPBOARD FIX + NOTIFICATION */
 function copyScript(type) {
-  const text = type === "fireworks"
+  const text =
+    type === "fireworks"
     ? 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()'
     : 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()';
 
-  navigator.clipboard.writeText(text);
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+
+  showNotify();
+}
+
+function showNotify() {
+  const n = document.getElementById("notify");
+  n.style.display = "block";
+  setTimeout(() => n.style.display = "none", 1800);
 }
 
 /* PARTICLES */
