@@ -25,7 +25,6 @@ body {
 canvas { position: absolute; inset: 0; z-index: 0; }
 .container { text-align: center; z-index: 2; }
 
-/* MAIN GUI */
 .logo {
   width: 200px;
   border-radius: 25px;
@@ -40,15 +39,16 @@ h1 {
 }
 
 /* BUTTONS */
-.btn, .panel-btn {
-  padding: 12px 20px;
+.btn, .panel-btn, .discord-btn {
+  padding: 14px 26px;
   border-radius: 30px;
   cursor: pointer;
-  transition: transform .15s ease;
+  transition: transform .15s ease, box-shadow .15s ease;
 }
 
-.btn:active, .panel-btn:active {
+.btn:active, .panel-btn:active, .discord-btn:active {
   transform: scale(.92);
+  box-shadow: 0 0 45px rgba(255,80,0,.9);
 }
 
 .btn {
@@ -63,64 +63,63 @@ h1 {
   border: none;
 }
 
-/* ===== SMALL MOBILE PANELS ===== */
+.discord-btn {
+  margin-left: 12px;
+  border: 2px solid #ff6a00;
+  background: transparent;
+  color: white;
+}
+
+/* ===== SQUARE PANELS ===== */
 .panel {
   display: none;
   position: absolute;
-
-  width: 240px;
-  height: 240px;
-
-  padding: 14px;
-  border-radius: 18px;
+  width: 320px;
+  height: 320px; /* ← square */
+  padding: 18px;
+  border-radius: 22px;
   background: linear-gradient(180deg, #1a0707, #0b0505);
-  box-shadow: 0 0 35px rgba(255,80,0,.85);
+  box-shadow: 0 0 50px rgba(255,80,0,.9);
   z-index: 2;
+  animation: slideIn .6s ease;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
+@keyframes slideIn {
+  from { opacity:0; transform: translateY(40px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
 .panel-header {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
 }
 
 .panel img {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
 }
 
-.title {
-  color: #ff6a00;
-  font-size: 15px;
-}
+.title { color: #ff6a00; }
+.beta { font-size: 12px; color: red; }
 
-.beta {
-  font-size: 11px;
-  color: red;
-}
-
-.status {
-  font-size: 12px;
-}
-
+.status { font-size: 13px; }
 .status.online { color: #00ff6a; }
 .status.updating { color: #ffaa00; }
 
-/* PANEL BUTTONS */
+/* PANEL BUTTON ROW */
 .panel-buttons {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  margin-top: auto;
 }
 
-.panel-buttons .panel-btn {
-  flex: 1;
-  font-size: 12px;
-}
+.panel-buttons .panel-btn { flex: 1; }
 
 .copy {
   background: linear-gradient(45deg, #ff0000, #ff6a00);
@@ -133,10 +132,51 @@ h1 {
   border: 2px solid #ff6a00;
   color: white;
 }
+
+/* MODERATION BOX */
+.changelog {
+  width: 360px;
+  padding: 18px;
+  margin-top: 25px;
+  border-radius: 25px;
+  background: linear-gradient(180deg, #ff6a00, #ff0000);
+  color: black;
+}
+
+/* POPUP */
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  background: linear-gradient(180deg, #1a0707, #0b0505);
+  border-radius: 20px;
+  box-shadow: 0 0 50px rgba(255,80,0,.9);
+  padding: 20px;
+  z-index: 999;
+}
+
+/* NOTIFICATION */
+#notify {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(45deg, #ff0000, #ff6a00);
+  color: black;
+  padding: 14px 26px;
+  border-radius: 30px;
+  display: none;
+  z-index: 999;
+}
 </style>
 </head>
 
 <body>
+<canvas id="particles"></canvas>
+<div id="notify">Script copied!</div>
 
 <div class="container" id="home">
   <img src="standard (10).gif" class="logo">
@@ -144,8 +184,7 @@ h1 {
   <button class="btn primary" onclick="openPanels()">CONTINUE</button>
 </div>
 
-<!-- FIREWORKS PANEL -->
-<div class="panel" id="fireworks" style="top:90px;">
+<div class="panel" id="fireworks" style="top:80px;">
   <div class="panel-header">
     <img src="Screenshot_20251220_145217_com.roblox.client_edit_107002055564400.jpg">
     <div>
@@ -156,13 +195,12 @@ h1 {
   </div>
 
   <div class="panel-buttons">
-    <button class="panel-btn copy">COPY</button>
-    <button class="panel-btn log-btn">LOG</button>
+    <button class="panel-btn copy">COPY SCRIPT</button>
+    <button class="panel-btn log-btn">CHANGELOG</button>
   </div>
 </div>
 
-<!-- PIGGY PANEL -->
-<div class="panel" id="piggy" style="top:360px;">
+<div class="panel" id="piggy" style="top:300px;">
   <div class="panel-header">
     <img src="Screenshot_20251220_145207_com.roblox.client_edit_107032225822728.jpg">
     <div>
@@ -172,18 +210,18 @@ h1 {
   </div>
 
   <div class="panel-buttons">
-    <button class="panel-btn copy">COPY</button>
-    <button class="panel-btn log-btn">LOG</button>
+    <button class="panel-btn copy">COPY SCRIPT</button>
+    <button class="panel-btn log-btn">CHANGELOG</button>
   </div>
 </div>
 
 <script>
 function openPanels(){
-  document.getElementById("home").style.display = "none";
-  document.getElementById("fireworks").style.display = "flex";
-  document.getElementById("piggy").style.display = "flex";
+  document.getElementById("home").style.display="none";
+  document.getElementById("fireworks").style.display="flex";
+  document.getElementById("piggy").style.display="flex";
 }
 </script>
 
 </body>
-</html> 
+</html>
