@@ -3,35 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Hub - Diesel N Steel Script</title>
+    <title>Xena Hub - Piggy Script</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            background: #000 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==') repeat; /* Simple dark grid fallback */
-            background-color: #111;
+            background: #000;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
             overflow: hidden;
+            color: white;
         }
 
         .grid-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                linear-gradient(rgba(255, 215, 0, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 215, 0, 0.05) 1px, transparent 1px);
+                linear-gradient(rgba(255, 100, 50, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 100, 50, 0.15) 1px, transparent 1px);
             background-size: 50px 50px;
             pointer-events: none;
+            z-index: 1;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
         }
 
         .container {
             position: relative;
             text-align: center;
-            color: white;
+            z-index: 3;
+        }
+
+        /* Glow text utility */
+        .glow {
+            text-shadow: 
+                0 0 10px #ff4500,
+                0 0 20px #ff4500,
+                0 0 30px #ff0000,
+                0 0 40px #ff0000;
+        }
+
+        .glow-strong {
+            text-shadow: 
+                0 0 15px #ff4500,
+                0 0 30px #ff4500,
+                0 0 50px #ff0000,
+                0 0 70px #ff0000;
         }
 
         /* Welcome Screen */
@@ -41,28 +68,38 @@
 
         #script-panel {
             display: none;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        #script-panel.show {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .logo {
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, #00ffff, #0000ff);
+            background: radial-gradient(circle, #ff4500, #8b0000);
             border-radius: 20px;
             margin: 0 auto 30px;
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+            box-shadow: 
+                0 0 40px rgba(255, 69, 0, 0.9),
+                0 0 80px rgba(255, 0, 0, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
-            color: cyan;
-            text-shadow: 0 0 10px cyan;
+            color: #ff4500;
+            text-shadow: 0 0 20px #fff;
         }
 
         .title {
             font-size: 48px;
             margin-bottom: 50px;
-            text-shadow: 0 0 20px white;
+            color: #ff4500;
         }
 
         .btn {
@@ -73,50 +110,54 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.7);
         }
 
         .continue-btn {
-            background: white;
-            color: black;
+            background: linear-gradient(to bottom, #ff4500, #8b0000);
+            color: white;
         }
 
         .discord-btn {
             background: transparent;
-            color: white;
-            border: 2px solid white;
+            color: #ff4500;
+            border: 2px solid #ff4500;
         }
 
         .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255,255,255,0.8);
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(255, 69, 0, 1);
         }
 
-        /* Script Panel */
+        /* Script Panel - Magma Theme */
         .panel {
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid gold;
+            background: rgba(20, 0, 0, 0.8);
+            border: 3px solid #ff4500;
             border-radius: 15px;
             padding: 20px;
             width: 350px;
-            box-shadow: 0 0 30px gold;
+            box-shadow: 
+                0 0 40px rgba(255, 69, 0, 0.8),
+                0 0 80px rgba(139, 0, 0, 0.5);
         }
 
         .panel-header {
-            background: linear-gradient(to bottom, gold, #b8860b);
+            background: linear-gradient(to bottom, #ff4500, #8b0000);
             padding: 10px;
             border-radius: 10px 10px 0 0;
             margin: -20px -20px 20px -20px;
             position: relative;
+            box-shadow: 0 0 20px #ff0000;
         }
 
         .script-icon {
             width: 60px;
             height: 60px;
-            background: url('https://via.placeholder.com/60?text=Jeepney') no-repeat center/cover; /* Replace with actual icon URL if available */
+            background: url('https://via.placeholder.com/60?text=Piggy') center/cover no-repeat;
             border-radius: 10px;
             display: inline-block;
             vertical-align: middle;
+            box-shadow: 0 0 15px #ff4500;
         }
 
         .changelog-btn {
@@ -128,61 +169,78 @@
             color: white;
             font-size: 14px;
             cursor: pointer;
+            text-shadow: 0 0 10px #ff4500;
         }
 
         .script-title {
             font-size: 24px;
             margin: 10px 0 5px;
+            color: #ff4500;
         }
 
         .last-updated {
             font-size: 14px;
-            opacity: 0.8;
+            opacity: 0.9;
+            color: #ff8c00;
         }
 
         .status {
-            color: lime;
+            color: #00ff00;
             margin: 15px 0;
+            font-weight: bold;
         }
 
         .buy-key-btn {
             background: transparent;
-            border: 2px solid white;
-            color: white;
+            border: 2px solid #ff4500;
+            color: #ff4500;
             padding: 12px;
             width: 100%;
             border-radius: 30px;
             margin: 15px 0;
             cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.6);
+        }
+
+        .buy-key-btn:hover {
+            background: #ff4500;
+            color: white;
+            box-shadow: 0 0 25px #ff0000;
         }
 
         .copy-script-btn {
-            background: gold;
-            color: black;
+            background: linear-gradient(to bottom, #ff4500, #8b0000);
+            color: white;
             padding: 15px;
             width: 100%;
             border-radius: 30px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 0 15px gold;
+            box-shadow: 0 0 25px rgba(255, 69, 0, 1);
+            transition: all 0.3s;
         }
 
-        .copy-script-btn:hover, .buy-key-btn:hover {
-            opacity: 0.9;
+        .copy-script-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(255, 0, 0, 1);
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
     <div class="grid-bg"></div>
+    <div id="particles-js"></div>
+
     <div class="container">
 
         <!-- Welcome Screen -->
         <div id="welcome-screen">
-            <div class="logo">NOVA HUB</div>
-            <p>WELCOME TO</p>
-            <h1 class="title">NOVA HUB</h1>
-            <button class="btn continue-btn" onclick="showScriptPanel()">CONTINUE</button>
-            <button class="btn discord-btn">DISCORD</button>
+            <div class="logo glow-strong">XENA HUB</div>
+            <p class="glow">WELCOME TO</p>
+            <h1 class="title glow-strong">XENA HUB</h1>
+            <button class="btn continue-btn glow" onclick="showScriptPanel()">CONTINUE</button>
+            <button class="btn discord-btn glow">DISCORD</button>
         </div>
 
         <!-- Script Panel -->
@@ -190,13 +248,13 @@
             <div class="panel">
                 <div class="panel-header">
                     <div class="script-icon"></div>
-                    <button class="changelog-btn">CHANGELOG</button>
+                    <button class="changelog-btn glow">CHANGELOG</button>
                 </div>
-                <div class="script-title">DIESEL N STEEL 🔧</div>
-                <p class="last-updated">Last Updated: Dec 18, 2025</p>
-                <p class="status">• ONLINE ✅ 2.1.0 STABLE</p>
-                <button class="buy-key-btn">🔑 BUY KEY</button>
-                <button class="copy-script-btn" onclick="copyScript()">📋 COPY SCRIPT</button>
+                <div class="script-title glow-strong">PIGGY SCRIPT 🐷</div>
+                <p class="last-updated glow">Last Updated: Dec 18, 2025</p>
+                <p class="status glow">• ONLINE ✅ 2.1.0 STABLE</p>
+                <button class="buy-key-btn glow">🔑 BUY KEY</button>
+                <button class="copy-script-btn glow" onclick="copyScript()">📋 COPY SCRIPT</button>
             </div>
         </div>
 
@@ -205,16 +263,49 @@
     <script>
         function showScriptPanel() {
             document.getElementById('welcome-screen').style.display = 'none';
-            document.getElementById('script-panel').style.display = 'block';
+            const panel = document.getElementById('script-panel');
+            panel.style.display = 'block';
+            setTimeout(() => panel.classList.add('show'), 50); // Trigger animation
         }
 
         function copyScript() {
-            // Placeholder script - replace with actual loadstring if needed
-            const script = `print("Diesel N Steel script loaded - Nova Hub")`;
+            // Replace this with your actual full Piggy script loadstring
+            const script = `print("Piggy script loaded - Xena Hub")`;
             navigator.clipboard.writeText(script).then(() => {
                 alert("Script copied to clipboard!");
+            }).catch(() => {
+                alert("Failed to copy script.");
             });
         }
+
+        // Magma-style particles (orange/red moving dots)
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: ['#ff4500', '#ff0000', '#ff8c00'] },
+                shape: { type: 'circle' },
+                opacity: { value: 0.8, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1 } },
+                size: { value: 4, random: true, anim: { enable: true, speed: 2, size_min: 0.1 } },
+                line_linked: { enable: false },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    attract: { enable: false }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
     </script>
 </body>
 </html>
