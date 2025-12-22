@@ -12,8 +12,8 @@ body {
   height: 100vh;
   background-color: #0a0a00;
   background-image:
-    linear-gradient(rgba(255,255,0,0.18) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,0,0.18) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,0,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,0,0.15) 1px, transparent 1px);
   background-size: 40px 40px;
   display: flex;
   justify-content: center;
@@ -46,6 +46,17 @@ h1 {
   transition: transform .15s ease, box-shadow .15s ease;
 }
 
+.btn:active, .panel-btn:active, .discord-btn:active {
+  transform: scale(.92);
+  box-shadow: 0 0 45px rgba(255,255,0,.9);
+}
+
+.btn {
+  border: 2px solid #ffee00;
+  background: transparent;
+  color: white;
+}
+
 .btn.primary {
   background: linear-gradient(45deg, #fff700, #ffea00);
   color: black;
@@ -70,6 +81,12 @@ h1 {
   background: linear-gradient(180deg, #1a1a00, #0b0b00);
   box-shadow: 0 0 50px rgba(255,255,0,.9);
   z-index: 2;
+  animation: slideIn .6s ease;
+}
+
+@keyframes slideIn {
+  from { opacity:0; transform: translateY(40px); }
+  to { opacity:1; transform: translateY(0); }
 }
 
 .panel-header {
@@ -87,9 +104,11 @@ h1 {
 .title { color: #ffee00; }
 .beta { font-size: 12px; color: #ffff00; }
 
+.status { font-size: 13px; margin-top: 2px; }
 .status.online { color: #00ff66; }
 .status.updating { color: #ffee00; }
 
+/* PANEL BUTTON ROW */
 .panel-buttons {
   display: flex;
   gap: 10px;
@@ -108,6 +127,16 @@ h1 {
   color: white;
 }
 
+/* MODERATION BOX */
+.changelog {
+  width: 360px;
+  padding: 18px;
+  margin-top: 25px;
+  border-radius: 25px;
+  background: linear-gradient(180deg, #fff700, #ffea00);
+  color: black;
+}
+
 /* POPUP */
 .popup {
   display: none;
@@ -121,8 +150,24 @@ h1 {
   box-shadow: 0 0 50px rgba(255,255,0,.9);
   padding: 20px;
   z-index: 999;
+  animation: popIn .4s ease;
 }
 
+@keyframes popIn {
+  from { opacity:0; transform: translate(-50%, -40%); }
+  to { opacity:1; transform: translate(-50%, -50%); }
+}
+
+.popup h3 { color: #ffee00; margin-top: 0; }
+.popup .close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* NOTIFICATION */
 #notify {
   position: fixed;
   bottom: 40px;
@@ -134,6 +179,10 @@ h1 {
   border-radius: 30px;
   display: none;
   z-index: 999;
+}
+
+@keyframes fadeOut {
+  to { opacity:0; transform: scale(.9); }
 }
 </style>
 </head>
@@ -151,6 +200,16 @@ h1 {
     <button class="btn primary" onclick="openPanels()">CONTINUE</button>
     <button class="discord-btn" onclick="openDiscord()">DISCORD</button>
   </div>
+
+  <div class="changelog">
+    <b>MODERATION TEAM</b><br><br>
+    Owner: shiro<br>
+    Admin: shiro<br>
+    Developers: shiro, Azairo, kiro<br>
+    Head Staff: kiro<br>
+    Staff: kiro<br>
+    Trial Staff: none
+  </div>
 </div>
 
 <!-- FIREWORKS PANEL -->
@@ -165,7 +224,7 @@ h1 {
   </div>
   <div class="panel-buttons">
     <button class="panel-btn copy" onclick="copyScript('fireworks')">COPY SCRIPT</button>
-    <button class="panel-btn log-btn">CHANGELOG</button>
+    <button class="panel-btn log-btn" onclick="openPopup('fireworksPopup')">CHANGELOG</button>
   </div>
 </div>
 
@@ -180,8 +239,21 @@ h1 {
   </div>
   <div class="panel-buttons">
     <button class="panel-btn copy" onclick="copyScript('piggy')">COPY SCRIPT</button>
-    <button class="panel-btn log-btn">CHANGELOG</button>
+    <button class="panel-btn log-btn" onclick="openPopup('piggyPopup')">CHANGELOG</button>
   </div>
+</div>
+
+<!-- POPUPS -->
+<div class="popup" id="fireworksPopup">
+  <span class="close" onclick="closePopup('fireworksPopup')">&times;</span>
+  <h3>Fireworks Playground Beta</h3>
+  <p>• New GUI<br>• Auto collect improved</p>
+</div>
+
+<div class="popup" id="piggyPopup">
+  <span class="close" onclick="closePopup('piggyPopup')">&times;</span>
+  <h3>Piggy Script v1.0</h3>
+  <p>• Fly<br>• Teleport<br>• WalkSpeed</p>
 </div>
 
 <script>
@@ -190,24 +262,57 @@ const fireworks = document.getElementById("fireworks");
 const piggy = document.getElementById("piggy");
 
 function openPanels() {
-  home.style.display = "none";
-  fireworks.style.display = "block";
-  piggy.style.display = "block";
+  home.style.animation = "fadeOut .4s ease forwards";
+  setTimeout(()=>{
+    home.style.display="none";
+    fireworks.style.display="block";
+    piggy.style.display="block";
+  },400);
 }
 
-function openDiscord() {
-  window.open("https://discord.gg/55Cc5bYS6T", "_blank");
+function openPopup(id){ document.getElementById(id).style.display="block"; }
+function closePopup(id){ document.getElementById(id).style.display="none"; }
+
+function openDiscord(){
+  window.open("https://discord.gg/55Cc5bYS6T","_blank");
 }
 
-function copyScript(type) {
-  const text = type === "fireworks"
-    ? 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()'
-    : 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()';
+function copyScript(type){
+  const txt = type==="fireworks"
+  ? 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()'
+  : 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()';
 
-  navigator.clipboard.writeText(text);
-  document.getElementById("notify").style.display = "block";
-  setTimeout(()=>notify.style.display="none",1500);
+  navigator.clipboard.writeText(txt).then(()=>{
+    notify.style.display="block";
+    setTimeout(()=>notify.style.display="none",1600);
+  });
 }
+
+/* PARTICLES */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let particles=Array.from({length:80},()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  r:Math.random()*2+1,
+  dx:(Math.random()-.5),
+  dy:(Math.random()-.5)
+}));
+
+(function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="rgba(255,255,0,.8)";
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+    p.x+=p.dx; p.y+=p.dy;
+  });
+  requestAnimationFrame(animate);
+})();
 </script>
 </body>
 </html>
