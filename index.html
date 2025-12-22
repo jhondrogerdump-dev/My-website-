@@ -10,10 +10,10 @@
 body {
   margin: 0;
   height: 100vh;
-  background-color: #0a0505;
+  background-color: #0a0a02;
   background-image:
-    linear-gradient(rgba(255,120,0,0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,120,0,0.15) 1px, transparent 1px);
+    linear-gradient(rgba(255,230,0,0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,230,0,0.18) 1px, transparent 1px);
   background-size: 40px 40px;
   display: flex;
   justify-content: center;
@@ -28,13 +28,13 @@ canvas { position: absolute; inset: 0; z-index: 0; }
 .logo {
   width: 200px;
   border-radius: 25px;
-  box-shadow: 0 0 40px rgba(255,80,0,.9);
+  box-shadow: 0 0 45px rgba(255,230,0,.9);
 }
 
 h1 {
   font-size: 44px;
-  color: #ff4500;
-  text-shadow: 0 0 15px #ff0000, 0 0 35px #ff6a00;
+  color: #ffee00;
+  text-shadow: 0 0 15px #ffd700, 0 0 35px #ffff55;
   letter-spacing: 4px;
 }
 
@@ -48,30 +48,30 @@ h1 {
 
 .btn:active, .panel-btn:active, .discord-btn:active {
   transform: scale(.92);
-  box-shadow: 0 0 45px rgba(255,80,0,.9);
+  box-shadow: 0 0 45px rgba(255,230,0,.9);
 }
 
 .btn {
-  border: 2px solid #ff6a00;
+  border: 2px solid #ffee00;
   background: transparent;
   color: white;
 }
 
 .btn.primary {
-  background: linear-gradient(45deg, #ff0000, #ff6a00);
+  background: linear-gradient(45deg, #ffd700, #ffee00);
   color: black;
   border: none;
 }
 
 .discord-btn {
   margin-left: 12px;
-  border: 2px solid #ff6a00;
+  border: 2px solid #ffee00;
   background: transparent;
   color: white;
 }
 
 .discord-btn:hover {
-  box-shadow: 0 0 30px rgba(255,100,0,.8);
+  box-shadow: 0 0 30px rgba(255,230,0,.8);
 }
 
 /* PANELS */
@@ -82,8 +82,8 @@ h1 {
   height: 160px;
   padding: 18px;
   border-radius: 22px;
-  background: linear-gradient(180deg, #1a0707, #0b0505);
-  box-shadow: 0 0 50px rgba(255,80,0,.9);
+  background: linear-gradient(180deg, #1a1a05, #0b0b02);
+  box-shadow: 0 0 50px rgba(255,230,0,.9);
   z-index: 2;
   animation: slideIn .6s ease;
 }
@@ -105,15 +105,15 @@ h1 {
   border-radius: 12px;
 }
 
-.title { color: #ff6a00; }
-.beta { font-size: 12px; color: red; }
+.title { color: #ffee00; }
+.beta { font-size: 12px; color: #ff4444; }
 
 .status {
   font-size: 13px;
   margin-top: 2px;
 }
 
-.status.online { color: #00ff6a; }
+.status.online { color: #00ff88; }
 .status.updating { color: #ffaa00; }
 
 /* PANEL BUTTON ROW */
@@ -128,14 +128,14 @@ h1 {
 }
 
 .copy {
-  background: linear-gradient(45deg, #ff0000, #ff6a00);
+  background: linear-gradient(45deg, #ffd700, #ffee00);
   color: black;
   border: none;
 }
 
 .log-btn {
   background: transparent;
-  border: 2px solid #ff6a00;
+  border: 2px solid #ffee00;
   color: white;
 }
 
@@ -145,7 +145,7 @@ h1 {
   padding: 18px;
   margin-top: 25px;
   border-radius: 25px;
-  background: linear-gradient(180deg, #ff6a00, #ff0000);
+  background: linear-gradient(180deg, #ffee00, #ffd700);
   color: black;
 }
 
@@ -157,18 +157,17 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 320px;
-  background: linear-gradient(180deg, #1a0707, #0b0505);
+  background: linear-gradient(180deg, #1a1a05, #0b0b02);
   border-radius: 20px;
-  box-shadow: 0 0 50px rgba(255,80,0,.9);
+  box-shadow: 0 0 50px rgba(255,230,0,.9);
   padding: 20px;
   z-index: 999;
   animation: popIn .4s ease;
 }
 
 .popup h3 {
-  color: #ff6a00;
+  color: #ffee00;
   margin-top: 0;
-  margin-bottom: 10px;
 }
 
 .popup .close {
@@ -191,7 +190,7 @@ h1 {
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(45deg, #ff0000, #ff6a00);
+  background: linear-gradient(45deg, #ffd700, #ffee00);
   color: black;
   padding: 14px 26px;
   border-radius: 30px;
@@ -217,7 +216,7 @@ h1 {
 
 <!-- HOME -->
 <div class="container" id="home">
-  <img src="standard (10).gif" class="logo">
+  <img src="standard (13).gif" class="logo">
   <h1>XENA HUB</h1>
 
   <div>
@@ -236,100 +235,7 @@ h1 {
   </div>
 </div>
 
-<!-- FIREWORKS PANEL -->
-<div class="panel" id="fireworks" style="top:80px;">
-  <div class="panel-header">
-    <img src="Screenshot_20251220_145217_com.roblox.client_edit_107002055564400.jpg">
-    <div>
-      <div class="title">Fireworks Playground</div>
-      <div class="beta">Beta</div>
-      <div class="status online">Online</div>
-    </div>
-  </div>
-
-  <div class="panel-buttons">
-    <button class="panel-btn copy" onclick="copyScript('fireworks')">COPY SCRIPT</button>
-    <button class="panel-btn log-btn" onclick="openPopup('fireworksPopup')">CHANGELOG</button>
-  </div>
-</div>
-
-<!-- PIGGY PANEL -->
-<div class="panel" id="piggy" style="top:300px;">
-  <div class="panel-header">
-    <img src="Screenshot_20251220_145207_com.roblox.client_edit_107032225822728.jpg">
-    <div>
-      <div class="title">Piggy Script</div>
-      <div class="status updating">Updating</div>
-    </div>
-  </div>
-
-  <div class="panel-buttons">
-    <button class="panel-btn copy" onclick="copyScript('piggy')">COPY SCRIPT</button>
-    <button class="panel-btn log-btn" onclick="openPopup('piggyPopup')">CHANGELOG</button>
-  </div>
-</div>
-
-<!-- FIREWORKS POPUP -->
-<div class="popup" id="fireworksPopup">
-  <span class="close" onclick="closePopup('fireworksPopup')">&times;</span>
-  <h3>Fireworks Playground Beta</h3>
-  <p>• New more aesthetic GUI with minimize button<br>
-     • Improved auto collect chest</p>
-</div>
-
-<!-- PIGGY POPUP -->
-<div class="popup" id="piggyPopup">
-  <span class="close" onclick="closePopup('piggyPopup')">&times;</span>
-  <h3>Piggy Script v1.0</h3>
-  <p>Changelogs:<br>
-     • Tools GUI for Book 1<br>
-     • Fly and invisible script button<br>
-     • Auto spam doors open and close<br>
-     • Teleport to players and WalkSpeed</p>
-</div>
-
 <script>
-const home = document.getElementById("home");
-const fireworks = document.getElementById("fireworks");
-const piggy = document.getElementById("piggy");
-
-function openPanels() {
-  home.style.animation = "fadeOut .4s ease forwards";
-  setTimeout(() => {
-    home.style.display = "none";
-    fireworks.style.display = "block";
-    piggy.style.display = "block";
-  }, 400);
-}
-
-function openPopup(id) {
-  document.getElementById(id).style.display = "block";
-}
-
-function closePopup(id) {
-  document.getElementById(id).style.display = "none";
-}
-
-function openDiscord() {
-  window.open("https://discord.gg/55Cc5bYS6T", "_blank");
-}
-
-function copyScript(type) {
-  const text =
-    type === "fireworks"
-    ? 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()'
-    : 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()';
-
-  navigator.clipboard.writeText(text).then(showNotify);
-}
-
-function showNotify() {
-  const n = document.getElementById("notify");
-  n.style.display = "block";
-  setTimeout(() => n.style.display = "none", 1800);
-}
-
-/* PARTICLES */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
@@ -345,7 +251,7 @@ let particles = Array.from({length:80},()=>({
 
 (function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="rgba(255,80,0,.8)";
+  ctx.fillStyle="rgba(255,230,0,.9)";
   particles.forEach(p=>{
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
@@ -356,4 +262,4 @@ let particles = Array.from({length:80},()=>({
 })();
 </script>
 </body>
-</html> 
+</html>
