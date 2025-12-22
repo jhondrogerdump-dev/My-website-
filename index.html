@@ -46,17 +46,6 @@ h1 {
   transition: transform .15s ease, box-shadow .15s ease;
 }
 
-.btn:active, .panel-btn:active, .discord-btn:active {
-  transform: scale(.92);
-  box-shadow: 0 0 45px rgba(255,255,0,.9);
-}
-
-.btn {
-  border: 2px solid #ffee00;
-  background: transparent;
-  color: white;
-}
-
 .btn.primary {
   background: linear-gradient(45deg, #fff700, #ffea00);
   color: black;
@@ -70,10 +59,6 @@ h1 {
   color: white;
 }
 
-.discord-btn:hover {
-  box-shadow: 0 0 30px rgba(255,255,0,.8);
-}
-
 /* PANELS */
 .panel {
   display: none;
@@ -85,12 +70,6 @@ h1 {
   background: linear-gradient(180deg, #1a1a00, #0b0b00);
   box-shadow: 0 0 50px rgba(255,255,0,.9);
   z-index: 2;
-  animation: slideIn .6s ease;
-}
-
-@keyframes slideIn {
-  from { opacity:0; transform: translateY(40px); }
-  to { opacity:1; transform: translateY(0); }
 }
 
 .panel-header {
@@ -108,23 +87,13 @@ h1 {
 .title { color: #ffee00; }
 .beta { font-size: 12px; color: #ffff00; }
 
-.status {
-  font-size: 13px;
-  margin-top: 2px;
-}
-
 .status.online { color: #00ff66; }
 .status.updating { color: #ffee00; }
 
-/* PANEL BUTTON ROW */
 .panel-buttons {
   display: flex;
   gap: 10px;
   margin-top: 14px;
-}
-
-.panel-buttons .panel-btn {
-  flex: 1;
 }
 
 .copy {
@@ -137,16 +106,6 @@ h1 {
   background: transparent;
   border: 2px solid #ffee00;
   color: white;
-}
-
-/* MODERATION BOX */
-.changelog {
-  width: 360px;
-  padding: 18px;
-  margin-top: 25px;
-  border-radius: 25px;
-  background: linear-gradient(180deg, #fff700, #ffea00);
-  color: black;
 }
 
 /* POPUP */
@@ -162,25 +121,8 @@ h1 {
   box-shadow: 0 0 50px rgba(255,255,0,.9);
   padding: 20px;
   z-index: 999;
-  animation: popIn .4s ease;
 }
 
-.popup h3 {
-  color: #ffee00;
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.popup .close {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  color: white;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-/* NOTIFICATION */
 #notify {
   position: fixed;
   bottom: 40px;
@@ -209,44 +151,63 @@ h1 {
     <button class="btn primary" onclick="openPanels()">CONTINUE</button>
     <button class="discord-btn" onclick="openDiscord()">DISCORD</button>
   </div>
+</div>
 
-  <div class="changelog">
-    <b>MODERATION TEAM</b><br><br>
-    Owner: shiro<br>
-    Admin: shiro<br>
-    Developers: shiro, Azairo, kiro<br>
-    Head Staff: kiro<br>
-    Staff: kiro<br>
-    Trial Staff: none
+<!-- FIREWORKS PANEL -->
+<div class="panel" id="fireworks" style="top:80px;">
+  <div class="panel-header">
+    <img src="Screenshot_20251220_145217_com.roblox.client_edit_107002055564400.jpg">
+    <div>
+      <div class="title">Fireworks Playground</div>
+      <div class="beta">Beta</div>
+      <div class="status online">Online</div>
+    </div>
+  </div>
+  <div class="panel-buttons">
+    <button class="panel-btn copy" onclick="copyScript('fireworks')">COPY SCRIPT</button>
+    <button class="panel-btn log-btn">CHANGELOG</button>
+  </div>
+</div>
+
+<!-- PIGGY PANEL -->
+<div class="panel" id="piggy" style="top:300px;">
+  <div class="panel-header">
+    <img src="Screenshot_20251220_145207_com.roblox.client_edit_107032225822728.jpg">
+    <div>
+      <div class="title">Piggy Script</div>
+      <div class="status updating">Updating</div>
+    </div>
+  </div>
+  <div class="panel-buttons">
+    <button class="panel-btn copy" onclick="copyScript('piggy')">COPY SCRIPT</button>
+    <button class="panel-btn log-btn">CHANGELOG</button>
   </div>
 </div>
 
 <script>
-/* PARTICLES */
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+const home = document.getElementById("home");
+const fireworks = document.getElementById("fireworks");
+const piggy = document.getElementById("piggy");
 
-let particles = Array.from({length:80},()=>({
-  x:Math.random()*canvas.width,
-  y:Math.random()*canvas.height,
-  r:Math.random()*2+1,
-  dx:(Math.random()-.5),
-  dy:(Math.random()-.5)
-}));
+function openPanels() {
+  home.style.display = "none";
+  fireworks.style.display = "block";
+  piggy.style.display = "block";
+}
 
-(function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="rgba(255,255,0,.8)";
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-    p.x+=p.dx; p.y+=p.dy;
-  });
-  requestAnimationFrame(animate);
-})();
+function openDiscord() {
+  window.open("https://discord.gg/55Cc5bYS6T", "_blank");
+}
+
+function copyScript(type) {
+  const text = type === "fireworks"
+    ? 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()'
+    : 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()';
+
+  navigator.clipboard.writeText(text);
+  document.getElementById("notify").style.display = "block";
+  setTimeout(()=>notify.style.display="none",1500);
+}
 </script>
 </body>
 </html>
