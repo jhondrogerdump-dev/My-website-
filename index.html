@@ -10,7 +10,7 @@
 body {
   margin: 0;
   height: 100vh;
-  background-color: #0a0a02;
+  background-color: #0b0b02;
   background-image:
     linear-gradient(rgba(255,230,0,0.18) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,230,0,0.18) 1px, transparent 1px);
@@ -28,13 +28,13 @@ canvas { position: absolute; inset: 0; z-index: 0; }
 .logo {
   width: 200px;
   border-radius: 25px;
-  box-shadow: 0 0 45px rgba(255,230,0,.9);
+  box-shadow: 0 0 45px rgba(255,230,0,.95);
 }
 
 h1 {
   font-size: 44px;
   color: #ffee00;
-  text-shadow: 0 0 15px #ffd700, 0 0 35px #ffff55;
+  text-shadow: 0 0 18px #ffd700, 0 0 40px #ffff55;
   letter-spacing: 4px;
 }
 
@@ -71,7 +71,7 @@ h1 {
 }
 
 .discord-btn:hover {
-  box-shadow: 0 0 30px rgba(255,230,0,.8);
+  box-shadow: 0 0 30px rgba(255,230,0,.9);
 }
 
 /* PANELS */
@@ -83,7 +83,7 @@ h1 {
   padding: 18px;
   border-radius: 22px;
   background: linear-gradient(180deg, #1a1a05, #0b0b02);
-  box-shadow: 0 0 50px rgba(255,230,0,.9);
+  box-shadow: 0 0 55px rgba(255,230,0,.95);
   z-index: 2;
   animation: slideIn .6s ease;
 }
@@ -159,7 +159,7 @@ h1 {
   width: 320px;
   background: linear-gradient(180deg, #1a1a05, #0b0b02);
   border-radius: 20px;
-  box-shadow: 0 0 50px rgba(255,230,0,.9);
+  box-shadow: 0 0 55px rgba(255,230,0,.95);
   padding: 20px;
   z-index: 999;
   animation: popIn .4s ease;
@@ -168,6 +168,7 @@ h1 {
 .popup h3 {
   color: #ffee00;
   margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .popup .close {
@@ -236,6 +237,7 @@ h1 {
 </div>
 
 <script>
+/* PARTICLES */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
