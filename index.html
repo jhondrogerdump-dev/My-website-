@@ -48,7 +48,7 @@ h1 {
 
 .btn:active, .panel-btn:active, .discord-btn:active {
   transform: scale(.92);
-  box-shadow: 0 0 45px rgba(255,230,0,.9);
+  box-shadow: 0 0 45px rgba(255,230,0,.95);
 }
 
 .btn {
@@ -106,7 +106,7 @@ h1 {
 }
 
 .title { color: #ffee00; }
-.beta { font-size: 12px; color: #ff4444; }
+.beta { font-size: 12px; color: red; }
 
 .status {
   font-size: 13px;
@@ -168,7 +168,6 @@ h1 {
 .popup h3 {
   color: #ffee00;
   margin-top: 0;
-  margin-bottom: 10px;
 }
 
 .popup .close {
@@ -178,11 +177,6 @@ h1 {
   color: white;
   font-size: 22px;
   cursor: pointer;
-}
-
-@keyframes popIn {
-  from { opacity:0; transform: translate(-50%, -40%); }
-  to { opacity:1; transform: translate(-50%, -50%); }
 }
 
 /* NOTIFICATION */
@@ -196,17 +190,7 @@ h1 {
   padding: 14px 26px;
   border-radius: 30px;
   display: none;
-  animation: notifyIn .35s ease;
   z-index: 999;
-}
-
-@keyframes notifyIn {
-  from { opacity:0; transform: translate(-50%, 20px); }
-  to { opacity:1; transform: translate(-50%, 0); }
-}
-
-@keyframes fadeOut {
-  to { opacity:0; transform: scale(.9); }
 }
 </style>
 </head>
@@ -233,6 +217,39 @@ h1 {
     Head Staff: kiro<br>
     Staff: kiro<br>
     Trial Staff: none
+  </div>
+</div>
+
+<!-- FIREWORKS PANEL -->
+<div class="panel" id="fireworks" style="top:80px;">
+  <div class="panel-header">
+    <img src="Screenshot_20251220_145217_com.roblox.client_edit_107002055564400.jpg">
+    <div>
+      <div class="title">Fireworks Playground</div>
+      <div class="beta">Beta</div>
+      <div class="status online">Online</div>
+    </div>
+  </div>
+
+  <div class="panel-buttons">
+    <button class="panel-btn copy" onclick="copyScript('fireworks')">COPY SCRIPT</button>
+    <button class="panel-btn log-btn" onclick="openPopup('fireworksPopup')">CHANGELOG</button>
+  </div>
+</div>
+
+<!-- PIGGY PANEL -->
+<div class="panel" id="piggy" style="top:300px;">
+  <div class="panel-header">
+    <img src="Screenshot_20251220_145207_com.roblox.client_edit_107032225822728.jpg">
+    <div>
+      <div class="title">Piggy Script</div>
+      <div class="status updating">Updating</div>
+    </div>
+  </div>
+
+  <div class="panel-buttons">
+    <button class="panel-btn copy" onclick="copyScript('piggy')">COPY SCRIPT</button>
+    <button class="panel-btn log-btn" onclick="openPopup('piggyPopup')">CHANGELOG</button>
   </div>
 </div>
 
