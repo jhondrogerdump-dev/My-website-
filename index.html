@@ -18,10 +18,9 @@ body {
   background: #000;
   color: #fff;
   height: 100vh;
-  overflow: hidden;
 }
 
-/* ---------- PAGE 1 (ICON PAGE) ---------- */
+/* ---------- PAGE 1 ---------- */
 #page1 {
   position: fixed;
   inset: 0;
@@ -33,38 +32,32 @@ body {
 }
 
 #page1 img {
-  width: 160px;
-  height: auto;
+  width: 170px;
   margin-bottom: 30px;
   filter: drop-shadow(0 0 25px gold);
 }
 
 #continueBtn {
-  padding: 14px 35px;
+  padding: 14px 40px;
   font-size: 1.1em;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   cursor: pointer;
   background: linear-gradient(90deg, gold, orange);
   color: #000;
   box-shadow: 0 0 20px gold;
 }
 
-#continueBtn:hover {
-  box-shadow: 0 0 35px gold;
-}
-
-/* ---------- PAGE 2 (MAIN SITE) ---------- */
+/* ---------- PAGE 2 ---------- */
 #page2 {
   display: none;
   min-height: 100vh;
   background: radial-gradient(circle at top, #111, #000);
 }
 
-/* HEADER */
 header {
   text-align: center;
-  padding: 40px 20px;
+  padding: 35px;
   background: linear-gradient(90deg, gold, orange);
   color: #000;
   box-shadow: 0 0 20px gold;
@@ -73,43 +66,71 @@ header {
 main {
   padding: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
 }
 
-.card {
-  background: #111;
+/* ---------- SCRIPT PANEL ---------- */
+.panel {
+  background: #0b0b0b;
   border: 2px solid gold;
-  border-radius: 15px;
+  border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 0 15px rgba(255,204,0,0.3);
-  transition: 0.2s;
+  box-shadow: 0 0 20px rgba(255,204,0,0.35);
 }
 
-.card:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 30px rgba(255,204,0,0.6);
-}
-
-.card h2 {
+.panel h2 {
+  margin-top: 0;
   color: gold;
 }
 
-button.mainBtn {
-  margin-top: 15px;
-  padding: 10px 20px;
+.status {
+  color: #00ff66;
+  text-shadow: 0 0 10px #00ff66;
+  font-size: 0.9em;
+}
+
+.creator {
+  font-size: 0.85em;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+  height: 90px;
+  background: #000;
+  border: 2px solid gold;
+  border-radius: 10px;
+  color: #00ffcc;
+  padding: 10px;
+  resize: none;
+}
+
+.copyBtn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 12px;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
   background: linear-gradient(90deg, gold, orange);
   color: #000;
-  cursor: pointer;
   box-shadow: 0 0 15px gold;
 }
 
-footer {
-  text-align: center;
-  padding: 20px;
-  opacity: 0.7;
+/* ---------- NOTIFICATION ---------- */
+#notify {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #00ff66;
+  color: #000;
+  padding: 12px 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #00ff66;
+  display: none;
 }
 </style>
 </head>
@@ -118,7 +139,7 @@ footer {
 
 <!-- PAGE 1 -->
 <div id="page1">
-  <img src="standard(13).gif" alt="Icon">
+  <img src="standard (13).gif">
   <button id="continueBtn" onclick="goNext()">CONTINUE</button>
 </div>
 
@@ -126,38 +147,47 @@ footer {
 <div id="page2">
   <header>
     <h1>Xena Hub</h1>
-    <p>Welcome to the Main Page</p>
+    <p>Script Loader</p>
   </header>
 
   <main>
-    <div class="card">
-      <h2>About</h2>
-      <p>This is the second page content.</p>
-      <button class="mainBtn">Open</button>
+    <!-- PANEL 1 -->
+    <div class="panel">
+      <h2>Fireworks Playground Beta Script</h2>
+      <div class="status">ONLINE</div>
+      <div class="creator">Created by Xena</div>
+      <textarea readonly id="script1">loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()</textarea>
+      <button class="copyBtn" onclick="copyScript('script1')">COPY SCRIPT</button>
     </div>
 
-    <div class="card">
-      <h2>Features</h2>
-      <p>Fast • Clean • Neon UI</p>
-      <button class="mainBtn">View</button>
-    </div>
-
-    <div class="card">
-      <h2>Contact</h2>
-      <p>Discord: XenaHub</p>
-      <button class="mainBtn">Message</button>
+    <!-- PANEL 2 -->
+    <div class="panel">
+      <h2>Piggy Script</h2>
+      <div class="status">ONLINE</div>
+      <div class="creator">Created by Xena</div>
+      <textarea readonly id="script2">loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()</textarea>
+      <button class="copyBtn" onclick="copyScript('script2')">COPY SCRIPT</button>
     </div>
   </main>
-
-  <footer>
-    © 2025 Xena Hub
-  </footer>
 </div>
+
+<div id="notify">Script copied!</div>
 
 <script>
 function goNext() {
   document.getElementById("page1").style.display = "none";
   document.getElementById("page2").style.display = "block";
+}
+
+function copyScript(id) {
+  const text = document.getElementById(id);
+  text.select();
+  text.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(text.value);
+
+  const n = document.getElementById("notify");
+  n.style.display = "block";
+  setTimeout(() => n.style.display = "none", 2000);
 }
 </script>
 
