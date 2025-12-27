@@ -17,7 +17,7 @@ body {
   margin: 0;
   background: #000;
   color: #fff;
-  height: 100vh;
+  overflow-x: hidden;
 }
 
 /* ---------- PAGE 1 ---------- */
@@ -28,24 +28,58 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 30px;
   background: radial-gradient(circle, #111, #000);
 }
 
 #page1 img {
-  width: 170px;
-  margin-bottom: 30px;
-  filter: drop-shadow(0 0 25px gold);
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 3px solid gold;
+  box-shadow: 0 0 30px gold;
+  animation: float 3s ease-in-out infinite;
 }
 
-#continueBtn {
-  padding: 14px 40px;
-  font-size: 1.1em;
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.page1-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.mainBtn {
+  padding: 14px 35px;
+  font-size: 1em;
   border: none;
   border-radius: 14px;
   cursor: pointer;
   background: linear-gradient(90deg, gold, orange);
   color: #000;
   box-shadow: 0 0 20px gold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.mainBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px gold;
+}
+
+/* ---------- PAGE TRANSITION ---------- */
+.fadeOut {
+  animation: fadeOut 0.6s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(1.1);
+  }
 }
 
 /* ---------- PAGE 2 ---------- */
@@ -60,13 +94,13 @@ header {
   padding: 35px;
   background: linear-gradient(90deg, gold, orange);
   color: #000;
-  box-shadow: 0 0 20px gold;
+  box-shadow: 0 0 25px gold;
 }
 
 main {
   padding: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 25px;
 }
 
@@ -74,9 +108,9 @@ main {
 .panel {
   background: #0b0b0b;
   border: 2px solid gold;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 20px;
-  box-shadow: 0 0 20px rgba(255,204,0,0.35);
+  box-shadow: 0 0 25px rgba(255,204,0,0.35);
 }
 
 .panel h2 {
@@ -98,10 +132,10 @@ main {
 
 textarea {
   width: 100%;
-  height: 90px;
+  height: 95px;
   background: #000;
   border: 2px solid gold;
-  border-radius: 10px;
+  border-radius: 12px;
   color: #00ffcc;
   padding: 10px;
   resize: none;
@@ -112,11 +146,36 @@ textarea {
   width: 100%;
   padding: 12px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   background: linear-gradient(90deg, gold, orange);
   color: #000;
   box-shadow: 0 0 15px gold;
+}
+
+.copyPulse {
+  animation: pulse 0.3s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- MODERATION BOX ---------- */
+.moderation {
+  grid-column: 1 / -1;
+  background: #0a0a0a;
+  border: 2px solid #ff4444;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 0 25px rgba(255,68,68,0.4);
+}
+
+.moderation h2 {
+  color: #ff4444;
+  margin-top: 0;
 }
 
 /* ---------- NOTIFICATION ---------- */
@@ -127,9 +186,9 @@ textarea {
   transform: translateX(-50%);
   background: #00ff66;
   color: #000;
-  padding: 12px 25px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px #00ff66;
+  padding: 12px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 25px #00ff66;
   display: none;
 }
 </style>
@@ -140,7 +199,11 @@ textarea {
 <!-- PAGE 1 -->
 <div id="page1">
   <img src="standard (13).gif">
-  <button id="continueBtn" onclick="goNext()">CONTINUE</button>
+
+  <div class="page1-buttons">
+    <button class="mainBtn" onclick="goNext()">CONTINUE</button>
+    <button class="mainBtn" onclick="window.open('https://discord.gg/cthehdHSpG','_blank')">DISCORD</button>
+  </div>
 </div>
 
 <!-- PAGE 2 -->
@@ -157,7 +220,7 @@ textarea {
       <div class="status">ONLINE</div>
       <div class="creator">Created by Xena</div>
       <textarea readonly id="script1">loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()</textarea>
-      <button class="copyBtn" onclick="copyScript('script1')">COPY SCRIPT</button>
+      <button class="copyBtn" onclick="copyScript('script1', this)">COPY SCRIPT</button>
     </div>
 
     <!-- PANEL 2 -->
@@ -166,7 +229,19 @@ textarea {
       <div class="status">ONLINE</div>
       <div class="creator">Created by Xena</div>
       <textarea readonly id="script2">loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()</textarea>
-      <button class="copyBtn" onclick="copyScript('script2')">COPY SCRIPT</button>
+      <button class="copyBtn" onclick="copyScript('script2', this)">COPY SCRIPT</button>
+    </div>
+
+    <!-- MODERATION -->
+    <div class="moderation">
+      <h2>Moderation</h2>
+      OWNER : SHIRO<br>
+      ADMIN : NONE<br>
+      DEVELOPER / CODER : AZAIRO<br>
+      WEBSITE DEVELOPER : KIRO<br>
+      HEAD STAFF : KIRO<br>
+      STAFF : KIRO<br>
+      TRIAL STAFF : NONE
     </div>
   </main>
 </div>
@@ -175,15 +250,20 @@ textarea {
 
 <script>
 function goNext() {
-  document.getElementById("page1").style.display = "none";
-  document.getElementById("page2").style.display = "block";
+  const p1 = document.getElementById("page1");
+  p1.classList.add("fadeOut");
+  setTimeout(() => {
+    p1.style.display = "none";
+    document.getElementById("page2").style.display = "block";
+  }, 600);
 }
 
-function copyScript(id) {
+function copyScript(id, btn) {
   const text = document.getElementById(id);
-  text.select();
-  text.setSelectionRange(0, 99999);
   navigator.clipboard.writeText(text.value);
+
+  btn.classList.add("copyPulse");
+  setTimeout(() => btn.classList.remove("copyPulse"), 300);
 
   const n = document.getElementById("notify");
   n.style.display = "block";
