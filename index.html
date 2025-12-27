@@ -20,6 +20,26 @@ body {
   overflow-x: hidden;
 }
 
+/* ---------- GRID BACKGROUND ---------- */
+.grid {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,215,0,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,215,0,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- PARTICLES ---------- */
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* ---------- PAGE 1 ---------- */
 #page1 {
   position: fixed;
@@ -29,7 +49,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 30px;
-  background: radial-gradient(circle, #111, #000);
+  z-index: 2;
 }
 
 #page1 img {
@@ -38,13 +58,13 @@ body {
   object-fit: cover;
   border-radius: 18px;
   border: 3px solid gold;
-  box-shadow: 0 0 30px gold;
+  box-shadow: 0 0 35px gold;
   animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
   0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-12px); }
   100% { transform: translateY(0); }
 }
 
@@ -55,38 +75,35 @@ body {
 
 .mainBtn {
   padding: 14px 35px;
-  font-size: 1em;
-  border: none;
   border-radius: 14px;
+  border: none;
   cursor: pointer;
   background: linear-gradient(90deg, gold, orange);
   color: #000;
-  box-shadow: 0 0 20px gold;
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 25px gold;
+  transition: 0.2s;
 }
 
 .mainBtn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 35px gold;
+  transform: scale(1.08);
+  box-shadow: 0 0 40px gold;
 }
 
-/* ---------- PAGE TRANSITION ---------- */
+/* ---------- TRANSITION ---------- */
 .fadeOut {
   animation: fadeOut 0.6s forwards;
 }
 
 @keyframes fadeOut {
-  to {
-    opacity: 0;
-    transform: scale(1.1);
-  }
+  to { opacity: 0; transform: scale(1.1); }
 }
 
 /* ---------- PAGE 2 ---------- */
 #page2 {
   display: none;
   min-height: 100vh;
-  background: radial-gradient(circle at top, #111, #000);
+  position: relative;
+  z-index: 2;
 }
 
 header {
@@ -104,19 +121,16 @@ main {
   gap: 25px;
 }
 
-/* ---------- SCRIPT PANEL ---------- */
+/* ---------- PANELS ---------- */
 .panel {
   background: #0b0b0b;
   border: 2px solid gold;
   border-radius: 18px;
   padding: 20px;
-  box-shadow: 0 0 25px rgba(255,204,0,0.35);
+  box-shadow: 0 0 30px rgba(255,215,0,0.35);
 }
 
-.panel h2 {
-  margin-top: 0;
-  color: gold;
-}
+.panel h2 { color: gold; }
 
 .status {
   color: #00ff66;
@@ -145,12 +159,11 @@ textarea {
   margin-top: 12px;
   width: 100%;
   padding: 12px;
-  border: none;
   border-radius: 12px;
+  border: none;
   cursor: pointer;
   background: linear-gradient(90deg, gold, orange);
-  color: #000;
-  box-shadow: 0 0 15px gold;
+  box-shadow: 0 0 20px gold;
 }
 
 .copyPulse {
@@ -158,27 +171,22 @@ textarea {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
   50% { transform: scale(1.08); }
-  100% { transform: scale(1); }
 }
 
-/* ---------- MODERATION BOX ---------- */
+/* ---------- MODERATION ---------- */
 .moderation {
   grid-column: 1 / -1;
   background: #0a0a0a;
   border: 2px solid #ff4444;
   border-radius: 18px;
   padding: 20px;
-  box-shadow: 0 0 25px rgba(255,68,68,0.4);
+  box-shadow: 0 0 30px rgba(255,68,68,0.4);
 }
 
-.moderation h2 {
-  color: #ff4444;
-  margin-top: 0;
-}
+.moderation h2 { color: #ff4444; }
 
-/* ---------- NOTIFICATION ---------- */
+/* ---------- NOTIFY ---------- */
 #notify {
   position: fixed;
   bottom: 30px;
@@ -190,16 +198,19 @@ textarea {
   border-radius: 12px;
   box-shadow: 0 0 25px #00ff66;
   display: none;
+  z-index: 3;
 }
 </style>
 </head>
 
 <body>
 
+<div class="grid"></div>
+<canvas id="particles"></canvas>
+
 <!-- PAGE 1 -->
 <div id="page1">
   <img src="standard (13).gif">
-
   <div class="page1-buttons">
     <button class="mainBtn" onclick="goNext()">CONTINUE</button>
     <button class="mainBtn" onclick="window.open('https://discord.gg/cthehdHSpG','_blank')">DISCORD</button>
@@ -214,25 +225,22 @@ textarea {
   </header>
 
   <main>
-    <!-- PANEL 1 -->
     <div class="panel">
       <h2>Fireworks Playground Beta Script</h2>
       <div class="status">ONLINE</div>
       <div class="creator">Created by Xena</div>
-      <textarea readonly id="script1">loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()</textarea>
-      <button class="copyBtn" onclick="copyScript('script1', this)">COPY SCRIPT</button>
+      <textarea readonly id="s1">loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()</textarea>
+      <button class="copyBtn" onclick="copyScript('s1',this)">COPY SCRIPT</button>
     </div>
 
-    <!-- PANEL 2 -->
     <div class="panel">
       <h2>Piggy Script</h2>
       <div class="status">ONLINE</div>
       <div class="creator">Created by Xena</div>
-      <textarea readonly id="script2">loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()</textarea>
-      <button class="copyBtn" onclick="copyScript('script2', this)">COPY SCRIPT</button>
+      <textarea readonly id="s2">loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()</textarea>
+      <button class="copyBtn" onclick="copyScript('s2',this)">COPY SCRIPT</button>
     </div>
 
-    <!-- MODERATION -->
     <div class="moderation">
       <h2>Moderation</h2>
       OWNER : SHIRO<br>
@@ -249,26 +257,47 @@ textarea {
 <div id="notify">Script copied!</div>
 
 <script>
-function goNext() {
-  const p1 = document.getElementById("page1");
-  p1.classList.add("fadeOut");
-  setTimeout(() => {
-    p1.style.display = "none";
-    document.getElementById("page2").style.display = "block";
-  }, 600);
+/* PAGE SWITCH */
+function goNext(){
+  page1.classList.add("fadeOut");
+  setTimeout(()=>{
+    page1.style.display="none";
+    page2.style.display="block";
+  },600);
 }
 
-function copyScript(id, btn) {
-  const text = document.getElementById(id);
-  navigator.clipboard.writeText(text.value);
-
+/* COPY */
+function copyScript(id,btn){
+  navigator.clipboard.writeText(document.getElementById(id).value);
   btn.classList.add("copyPulse");
-  setTimeout(() => btn.classList.remove("copyPulse"), 300);
-
-  const n = document.getElementById("notify");
-  n.style.display = "block";
-  setTimeout(() => n.style.display = "none", 2000);
+  setTimeout(()=>btn.classList.remove("copyPulse"),300);
+  notify.style.display="block";
+  setTimeout(()=>notify.style.display="none",2000);
 }
+
+/* PARTICLES */
+const c=document.getElementById("particles"),x=c.getContext("2d");
+let w,h,p=[];
+function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
+resize();addEventListener("resize",resize);
+
+for(let i=0;i<80;i++){
+  p.push({x:Math.random()*w,y:Math.random()*h,s:Math.random()*2+1,v:Math.random()*0.5+0.2});
+}
+
+function draw(){
+  x.clearRect(0,0,w,h);
+  x.fillStyle="rgba(255,215,0,0.8)";
+  p.forEach(a=>{
+    x.beginPath();
+    x.arc(a.x,a.y,a.s,0,Math.PI*2);
+    x.fill();
+    a.y+=a.v;
+    if(a.y>h)a.y=0;
+  });
+  requestAnimationFrame(draw);
+}
+draw();
 </script>
 
 </body>
