@@ -1,125 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Xena Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Xena Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Orbitron', sans-serif;
-    }
+<style>
+* {
+  font-family: 'Orbitron', sans-serif;
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      background: radial-gradient(circle at top, #111 0%, #000 70%);
-      color: #fff;
-      min-height: 100vh;
-    }
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  height: 100vh;
+  overflow: hidden;
+}
 
-    header {
-      text-align: center;
-      padding: 40px 20px;
-      background: linear-gradient(90deg, #ffcc00, #ff8800);
-      color: #000;
-      box-shadow: 0 0 20px #ffcc00;
-    }
+/* ---------- PAGE 1 (ICON PAGE) ---------- */
+#page1 {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #111, #000);
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
+#page1 img {
+  width: 160px;
+  height: auto;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 0 25px gold);
+}
 
-    header p {
-      margin-top: 10px;
-      font-size: 1em;
-    }
+#continueBtn {
+  padding: 14px 35px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: linear-gradient(90deg, gold, orange);
+  color: #000;
+  box-shadow: 0 0 20px gold;
+}
 
-    main {
-      padding: 30px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
+#continueBtn:hover {
+  box-shadow: 0 0 35px gold;
+}
 
-    .card {
-      background: #111;
-      border: 2px solid #ffcc00;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
+/* ---------- PAGE 2 (MAIN SITE) ---------- */
+#page2 {
+  display: none;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #111, #000);
+}
 
-    .card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 30px rgba(255, 204, 0, 0.6);
-    }
+/* HEADER */
+header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(90deg, gold, orange);
+  color: #000;
+  box-shadow: 0 0 20px gold;
+}
 
-    .card h2 {
-      margin-top: 0;
-      color: #ffcc00;
-    }
+main {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
 
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(90deg, #ffcc00, #ff8800);
-      color: #000;
-      font-size: 1em;
-      cursor: pointer;
-      box-shadow: 0 0 10px #ffcc00;
-    }
+.card {
+  background: #111;
+  border: 2px solid gold;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(255,204,0,0.3);
+  transition: 0.2s;
+}
 
-    button:hover {
-      box-shadow: 0 0 20px #ffcc00;
-    }
+.card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 30px rgba(255,204,0,0.6);
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-      opacity: 0.7;
-    }
-  </style>
+.card h2 {
+  color: gold;
+}
+
+button.mainBtn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, gold, orange);
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 0 15px gold;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.7;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <h1>Xena Hub</h1>
-  <p>Simple • Fast • Clean Website</p>
-</header>
+<!-- PAGE 1 -->
+<div id="page1">
+  <img src="standard(13).gif" alt="Icon">
+  <button id="continueBtn" onclick="goNext()">CONTINUE</button>
+</div>
 
-<main>
-  <div class="card">
-    <h2>About</h2>
-    <p>This is a simple HTML website. You can customize colors, text, and layout easily.</p>
-    <button onclick="alert('Welcome to Xena Hub!')">Click Me</button>
-  </div>
+<!-- PAGE 2 -->
+<div id="page2">
+  <header>
+    <h1>Xena Hub</h1>
+    <p>Welcome to the Main Page</p>
+  </header>
 
-  <div class="card">
-    <h2>Features</h2>
-    <p>✔ Responsive design<br>✔ Neon style<br>✔ Works offline</p>
-    <button>Learn More</button>
-  </div>
+  <main>
+    <div class="card">
+      <h2>About</h2>
+      <p>This is the second page content.</p>
+      <button class="mainBtn">Open</button>
+    </div>
 
-  <div class="card">
-    <h2>Contact</h2>
-    <p>Email: example@email.com<br>Discord: XenaHub</p>
-    <button>Message</button>
-  </div>
-</main>
+    <div class="card">
+      <h2>Features</h2>
+      <p>Fast • Clean • Neon UI</p>
+      <button class="mainBtn">View</button>
+    </div>
 
-<footer>
-  © 2025 Xena Hub. All rights reserved.
-</footer>
+    <div class="card">
+      <h2>Contact</h2>
+      <p>Discord: XenaHub</p>
+      <button class="mainBtn">Message</button>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Xena Hub
+  </footer>
+</div>
+
+<script>
+function goNext() {
+  document.getElementById("page1").style.display = "none";
+  document.getElementById("page2").style.display = "block";
+}
+</script>
 
 </body>
 </html>
