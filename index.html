@@ -22,18 +22,27 @@ pointer-events:none;z-index:0}
 /* PARTICLES */
 canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
 
-/* PAGES */
+/* PAGE CONTAINER */
 .page{
 position:fixed;inset:0;
 display:none;
 opacity:0;
 transform:translateY(40px);
-transition:.6s ease;
+transition:.5s ease;
 z-index:2}
 .page.active{
 display:block;
 opacity:1;
-transform:translateY(0)}
+transform:translateY(0)
+}
+
+/* INTRO PAGE BUTTONS HORIZONTAL */
+.intro-buttons{
+display:flex;
+gap:20px;
+justify-content:center;
+margin-top:20px;
+}
 
 /* BUTTON */
 .btn{
@@ -60,7 +69,9 @@ main{
 padding:30px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:30px}
+gap:30px;
+max-height:calc(100vh - 130px);
+overflow-y:auto;}
 
 .panel{
 background:#0b0b0b;
@@ -85,7 +96,7 @@ color:#00ffcc;
 padding:10px;
 resize:none}
 
-/* COPY */
+/* COPY BUTTON */
 .copyBtn{
 margin-top:12px;width:100%;
 padding:12px;border-radius:12px;
@@ -93,16 +104,42 @@ border:none;cursor:pointer;
 background:linear-gradient(90deg,#FFD700,#FFA500);
 box-shadow:0 0 25px gold}
 
-/* FEATURES LIST */
+/* MODERATION BOX */
+.moderation{
+grid-column:1/-1;
+background:#0a0a0a;
+border:2px solid #ff4444;
+border-radius:20px;
+padding:25px;
+box-shadow:0 0 40px rgba(255,68,68,.5);
+color:#ff4444;
+text-shadow:0 0 10px #ff4444}
+
+/* FLOATING IMAGE */
+#intro-img{
+width:160px;
+height:160px;
+border-radius:18px;
+border:3px solid gold;
+box-shadow:0 0 40px gold;
+animation:float 2s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+}
+
 ul li{
 margin:8px 0;
 color:#00ffcc;
 text-shadow:0 0 12px #00ffcc}
 
-/* TOP ACTIONS */
+/* TOP ACTIONS BUTTONS */
 .actions{
 text-align:center;
-margin:25px;
+margin:20px;
 display:flex;
 gap:15px;
 justify-content:center}
@@ -116,14 +153,16 @@ justify-content:center}
 
 <!-- PAGE 1 -->
 <div id="page1" class="page active">
-  <div style="height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px">
-    <img src="standard (13).gif" style="width:160px;border-radius:18px;box-shadow:0 0 40px gold">
-    <button class="btn" onclick="go('page2')">CONTINUE</button>
-    <button class="btn" onclick="window.open('https://discord.gg/cthehdHSpG','_blank')">DISCORD</button>
+  <div style="height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px">
+    <img id="intro-img" src="standard (13).gif">
+    <div class="intro-buttons">
+      <button class="btn" onclick="go('page2')">CONTINUE</button>
+      <button class="btn" onclick="window.open('https://discord.gg/cthehdHSpG','_blank')">DISCORD</button>
+    </div>
   </div>
 </div>
 
-<!-- PAGE 2 MAIN SCRIPT PAGE -->
+<!-- PAGE 2 -->
 <div id="page2" class="page">
 <header>
 <h1>Xena Hub Main Page</h1>
@@ -136,16 +175,16 @@ justify-content:center}
 </div>
 
 <main>
-<!-- SCRIPT 1 -->
+<!-- PANEL 1 -->
 <div class="panel">
-<h2>Fireworks Playground Beta</h2>
+<h2>Fireworks Playground Beta Script</h2>
 <div class="status">ONLINE</div>
 <div class="creator">Created by Xena</div>
 <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()</textarea>
 <button class="copyBtn">COPY SCRIPT</button>
 </div>
 
-<!-- SCRIPT 2 -->
+<!-- PANEL 2 -->
 <div class="panel">
 <h2>Piggy Script</h2>
 <div class="status">ONLINE</div>
@@ -154,13 +193,25 @@ justify-content:center}
 <button class="copyBtn">COPY SCRIPT</button>
 </div>
 
-<!-- SCRIPT 3 -->
+<!-- PANEL 3 -->
 <div class="panel">
 <h2>Taxi Boss Script</h2>
 <div class="status">ONLINE</div>
 <div class="creator">Created by Xena</div>
 <textarea readonly>loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()</textarea>
 <button class="copyBtn">COPY SCRIPT</button>
+</div>
+
+<!-- MODERATION -->
+<div class="moderation">
+<h2>Moderation</h2>
+OWNER : SHIRO<br>
+ADMIN : NONE<br>
+DEVELOPER / CODER : AZAIRO<br>
+WEBSITE DEVELOPER : KIRO<br>
+HEAD STAFF : KIRO<br>
+STAFF : KIRO<br>
+TRIAL STAFF : NONE
 </div>
 </main>
 </div>
@@ -218,6 +269,8 @@ current=id;
 document.getElementById(id).style.display='block';
 document.getElementById(id).classList.add('active');
 },200);
+
+/* Optional: page transition animation can be enhanced further */
 }
 
 /* PARTICLES */
