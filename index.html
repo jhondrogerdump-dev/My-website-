@@ -24,23 +24,18 @@ canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
 
 /* PAGES */
 .page{
-position:fixed;inset:0;z-index:2;
-display:none;opacity:0;
-transform:translateX(40px);
+position:fixed;inset:0;
+display:none;
+opacity:0;
+transform:translateY(40px);
 transition:.6s ease;
-}
-.page.active{display:block;opacity:1;transform:translateX(0)}
-.page.exit{opacity:0;transform:translateX(-40px)}
+z-index:2}
+.page.active{
+display:block;
+opacity:1;
+transform:translateY(0)}
 
-.center{
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-gap:30px}
-
-/* BUTTONS */
+/* BUTTON */
 .btn{
 padding:14px 35px;
 border-radius:14px;
@@ -74,30 +69,43 @@ border-radius:20px;
 padding:25px;
 box-shadow:0 0 40px rgba(255,215,0,.6);
 transition:.3s}
-.panel:hover{transform:translateY(-8px);box-shadow:0 0 70px gold}
+.panel:hover{transform:translateY(-6px);box-shadow:0 0 70px gold}
 
 h2{color:gold;text-shadow:0 0 15px gold}
+.status{color:#00ff66;text-shadow:0 0 12px #00ff66}
+.creator{opacity:.8}
+
+/* TEXTAREA */
+textarea{
+width:100%;height:90px;
+background:#000;
+border:2px solid gold;
+border-radius:12px;
+color:#00ffcc;
+padding:10px;
+resize:none}
+
+/* COPY */
+.copyBtn{
+margin-top:12px;width:100%;
+padding:12px;border-radius:12px;
+border:none;cursor:pointer;
+background:linear-gradient(90deg,#FFD700,#FFA500);
+box-shadow:0 0 25px gold}
+
+/* FEATURES LIST */
 ul li{
 margin:8px 0;
 color:#00ffcc;
 text-shadow:0 0 12px #00ffcc}
 
-/* BACK BUTTON */
-.top-btn{
-position:fixed;
-top:20px;left:20px;
-z-index:5}
-
-/* NOTIFY */
-#notify{
-position:fixed;
-bottom:30px;left:50%;
-transform:translateX(-50%);
-background:#00ff66;color:#000;
-padding:12px 30px;
-border-radius:12px;
-box-shadow:0 0 30px #00ff66;
-display:none;font-weight:bold}
+/* TOP ACTIONS */
+.actions{
+text-align:center;
+margin:25px;
+display:flex;
+gap:15px;
+justify-content:center}
 </style>
 </head>
 
@@ -108,48 +116,64 @@ display:none;font-weight:bold}
 
 <!-- PAGE 1 -->
 <div id="page1" class="page active">
-  <div class="center">
+  <div style="height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px">
     <img src="standard (13).gif" style="width:160px;border-radius:18px;box-shadow:0 0 40px gold">
     <button class="btn" onclick="go('page2')">CONTINUE</button>
+    <button class="btn" onclick="window.open('https://discord.gg/cthehdHSpG','_blank')">DISCORD</button>
   </div>
 </div>
 
-<!-- PAGE 2 MAIN -->
+<!-- PAGE 2 MAIN SCRIPT PAGE -->
 <div id="page2" class="page">
 <header>
-<h1>Xena Hub</h1>
+<h1>Xena Hub Main Page</h1>
 <p style="text-shadow:0 0 15px #FFA500">Script Loader</p>
 </header>
 
-<div style="text-align:center;margin:25px">
+<div class="actions">
 <button class="btn" onclick="go('page3')">VIEW FEATURES</button>
+<button class="btn" onclick="go('page1')">BACK</button>
 </div>
 
 <main>
+<!-- SCRIPT 1 -->
 <div class="panel">
-<h2>Fireworks Playground</h2>
-<p style="color:#00ff66;text-shadow:0 0 12px #00ff66">ONLINE</p>
+<h2>Fireworks Playground Beta</h2>
+<div class="status">ONLINE</div>
+<div class="creator">Created by Xena</div>
+<textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()</textarea>
+<button class="copyBtn">COPY SCRIPT</button>
 </div>
 
+<!-- SCRIPT 2 -->
 <div class="panel">
 <h2>Piggy Script</h2>
-<p style="color:#00ff66;text-shadow:0 0 12px #00ff66">ONLINE</p>
+<div class="status">ONLINE</div>
+<div class="creator">Created by Xena</div>
+<textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()</textarea>
+<button class="copyBtn">COPY SCRIPT</button>
 </div>
 
+<!-- SCRIPT 3 -->
 <div class="panel">
 <h2>Taxi Boss Script</h2>
-<p style="color:#00ff66;text-shadow:0 0 12px #00ff66">ONLINE</p>
+<div class="status">ONLINE</div>
+<div class="creator">Created by Xena</div>
+<textarea readonly>loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()</textarea>
+<button class="copyBtn">COPY SCRIPT</button>
 </div>
 </main>
 </div>
 
 <!-- PAGE 3 FEATURES -->
 <div id="page3" class="page">
-<button class="btn top-btn" onclick="go('page2')">⬅ BACK</button>
-
 <header>
 <h1>XENA HUB FEATURES</h1>
 </header>
+
+<div class="actions">
+<button class="btn" onclick="go('page2')">BACK TO MAIN</button>
+</div>
 
 <main>
 <div class="panel">
@@ -165,7 +189,7 @@ display:none;font-weight:bold}
 <li>TOOLS GUI</li>
 <li>TOOLS GUI FOR BOTH BOOKS</li>
 <li>AUTO FIND PAGES</li>
-<li>WALK SPEED / TELEPORTS TO PLAYER</li>
+<li>WALK SPEED / TELEPORT</li>
 <li>AUTO SPAM DOOR</li>
 <li>MORE</li>
 </ul>
@@ -184,24 +208,20 @@ display:none;font-weight:bold}
 </main>
 </div>
 
-<div id="notify">Done</div>
-
 <script>
 let current='page1';
 function go(id){
 document.getElementById(current).classList.remove('active');
-document.getElementById(current).classList.add('exit');
 setTimeout(()=>{
 document.getElementById(current).style.display='none';
-document.getElementById(current).classList.remove('exit');
 current=id;
 document.getElementById(id).style.display='block';
 document.getElementById(id).classList.add('active');
-},500);
+},200);
 }
 
 /* PARTICLES */
-const c=document.getElementById("particles"),x=c.getContext("2d");
+const c=document.querySelector("canvas"),x=c.getContext("2d");
 let w,h,p=[];
 function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
 resize();addEventListener("resize",resize);
