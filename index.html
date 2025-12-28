@@ -4,155 +4,100 @@
 <meta charset="UTF-8">
 <title>Xena Hub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
 
 <style>
-* { font-family: 'Orbitron', sans-serif; box-sizing: border-box; margin:0; padding:0; }
-body { background:#000; color:#fff; overflow-x:hidden; }
+*{font-family:'Orbitron',sans-serif;box-sizing:border-box;margin:0;padding:0}
+body{background:#000;color:#fff;overflow-x:hidden}
 
-/* ---------- GRID BACKGROUND ---------- */
-.grid {
-  position: fixed; inset:0;
-  background:
-    linear-gradient(rgba(255,215,0,0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,215,0,0.1) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events:none;
-  z-index:0;
+/* GRID */
+.grid{
+position:fixed;inset:0;
+background:
+linear-gradient(rgba(255,215,0,.1)1px,transparent 1px),
+linear-gradient(90deg,rgba(255,215,0,.1)1px,transparent 1px);
+background-size:40px 40px;
+pointer-events:none;z-index:0}
+
+/* PARTICLES */
+canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+
+/* PAGES */
+.page{
+position:fixed;inset:0;z-index:2;
+display:none;opacity:0;
+transform:translateX(40px);
+transition:.6s ease;
 }
+.page.active{display:block;opacity:1;transform:translateX(0)}
+.page.exit{opacity:0;transform:translateX(-40px)}
 
-/* ---------- PARTICLES ---------- */
-canvas { position: fixed; inset:0; z-index:1; pointer-events:none; }
+.center{
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:30px}
 
-/* ---------- PAGE 1 ---------- */
-#page1 {
-  position: fixed; inset:0;
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  gap:30px; z-index:2;
-}
+/* BUTTONS */
+.btn{
+padding:14px 35px;
+border-radius:14px;
+border:none;cursor:pointer;
+background:linear-gradient(90deg,#FFD700,#FFA500);
+color:#000;
+box-shadow:0 0 30px gold;
+transition:.3s}
+.btn:hover{transform:scale(1.1);box-shadow:0 0 60px gold}
 
-#page1 img {
-  width:160px; height:160px; object-fit:cover;
-  border-radius:18px; border:3px solid gold;
-  box-shadow:0 0 40px gold;
-  animation:float 3s ease-in-out infinite;
-}
+/* HEADER */
+header{
+text-align:center;
+padding:30px;
+background:linear-gradient(90deg,#FFD700,#FFA500);
+color:#000;
+box-shadow:0 0 30px gold;
+border-radius:0 0 20px 20px}
 
-@keyframes float {
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-12px);}
-  100%{transform:translateY(0);}
-}
+/* PANELS */
+main{
+padding:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px}
 
-.page1-buttons { display:flex; gap:15px; }
+.panel{
+background:#0b0b0b;
+border:2px solid gold;
+border-radius:20px;
+padding:25px;
+box-shadow:0 0 40px rgba(255,215,0,.6);
+transition:.3s}
+.panel:hover{transform:translateY(-8px);box-shadow:0 0 70px gold}
 
-.mainBtn {
-  padding:14px 35px; border-radius:14px; border:none; cursor:pointer;
-  background: linear-gradient(90deg,#FFD700,#FFA500); color:#000;
-  box-shadow:0 0 25px gold; transition:0.3s;
-}
-.mainBtn:hover {
-  transform: scale(1.1);
-  box-shadow:0 0 50px #FFD700,0 0 25px #FFA500;
-}
+h2{color:gold;text-shadow:0 0 15px gold}
+ul li{
+margin:8px 0;
+color:#00ffcc;
+text-shadow:0 0 12px #00ffcc}
 
-/* ---------- PAGE TRANSITION ---------- */
-.fadeOut { animation: fadeOut 0.6s forwards; }
-@keyframes fadeOut { to { opacity:0; transform:scale(1.1); } }
+/* BACK BUTTON */
+.top-btn{
+position:fixed;
+top:20px;left:20px;
+z-index:5}
 
-/* ---------- PAGE 2 ---------- */
-#page2 { display:none; min-height:100vh; position:relative; z-index:2; }
-
-header {
-  text-align:center; padding:35px;
-  background:linear-gradient(90deg,#FFD700,#FFA500);
-  color:#000; box-shadow:0 0 30px #FFD700;
-  border-radius:0 0 15px 15px;
-}
-
-header h1 { font-size:2.5em; text-shadow:0 0 15px #FFD700; }
-header p { font-size:1em; text-shadow:0 0 10px #FFA500; }
-
-/* ---------- MAIN PANELS ---------- */
-main {
-  padding:30px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:30px;
-}
-
-.panel {
-  background:#0b0b0b;
-  border:2px solid gold;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 0 40px rgba(255,215,0,0.5);
-  transition:0.3s;
-}
-.panel:hover {
-  transform:translateY(-5px);
-  box-shadow:0 0 60px rgba(255,215,0,0.7);
-}
-
-.panel h2 { color:gold; font-size:1.5em; text-shadow:0 0 8px gold; }
-.status { color:#00ff66; text-shadow:0 0 12px #00ff66; font-size:0.9em; margin-bottom:5px; }
-.creator { font-size:0.85em; opacity:0.8; margin-bottom:10px; }
-
-textarea {
-  width:100%; height:95px;
-  background:#000; border:2px solid gold;
-  border-radius:12px; color:#00ffcc;
-  padding:10px; resize:none;
-}
-
-.copyBtn {
-  margin-top:12px; width:100%;
-  padding:12px; border-radius:12px;
-  border:none; cursor:pointer;
-  background: linear-gradient(90deg,#FFD700,#FFA500);
-  box-shadow:0 0 25px gold; transition:0.3s;
-}
-.copyBtn:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 45px #FFD700;
-}
-
-/* ---------- COPY ANIMATION ---------- */
-.copyPulse { animation:pulse 0.3s; }
-@keyframes pulse { 50%{ transform:scale(1.08); } }
-
-/* ---------- MODERATION ---------- */
-.moderation {
-  grid-column:1/-1;
-  background:#0a0a0a;
-  border:2px solid #ff4444;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 0 40px rgba(255,68,68,0.5);
-}
-.moderation h2 {
-  color:#ff4444;
-  margin-bottom:10px;
-  text-shadow:0 0 10px #ff4444;
-}
-
-/* ---------- NOTIFY ---------- */
-#notify {
-  position:fixed;
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#00ff66;
-  color:#000;
-  padding:12px 30px;
-  border-radius:12px;
-  box-shadow:0 0 30px #00ff66;
-  display:none;
-  z-index:3;
-  font-weight:bold;
-}
+/* NOTIFY */
+#notify{
+position:fixed;
+bottom:30px;left:50%;
+transform:translateX(-50%);
+background:#00ff66;color:#000;
+padding:12px 30px;
+border-radius:12px;
+box-shadow:0 0 30px #00ff66;
+display:none;font-weight:bold}
 </style>
 </head>
 
@@ -162,104 +107,112 @@ textarea {
 <canvas id="particles"></canvas>
 
 <!-- PAGE 1 -->
-<div id="page1">
-  <img src="standard (13).gif">
-  <div class="page1-buttons">
-    <button class="mainBtn" onclick="goNext()">CONTINUE</button>
-    <button class="mainBtn" onclick="window.open('https://discord.gg/cthehdHSpG','_blank')">DISCORD</button>
+<div id="page1" class="page active">
+  <div class="center">
+    <img src="standard (13).gif" style="width:160px;border-radius:18px;box-shadow:0 0 40px gold">
+    <button class="btn" onclick="go('page2')">CONTINUE</button>
   </div>
 </div>
 
-<!-- PAGE 2 -->
-<div id="page2">
-  <header>
-    <h1>Xena Hub Main Page</h1>
-    <p>Script Loader</p>
-  </header>
+<!-- PAGE 2 MAIN -->
+<div id="page2" class="page">
+<header>
+<h1>Xena Hub</h1>
+<p style="text-shadow:0 0 15px #FFA500">Script Loader</p>
+</header>
 
-  <main>
-    <!-- PANEL 1 -->
-    <div class="panel">
-      <h2>Fireworks Playground Beta Script</h2>
-      <div class="status">ONLINE</div>
-      <div class="creator">Created by Xena</div>
-      <textarea readonly id="s1">loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()</textarea>
-      <button class="copyBtn" onclick="copyScript('s1',this)">COPY SCRIPT</button>
-    </div>
-
-    <!-- PANEL 2 -->
-    <div class="panel">
-      <h2>Piggy Script</h2>
-      <div class="status">ONLINE</div>
-      <div class="creator">Created by Xena</div>
-      <textarea readonly id="s2">loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()</textarea>
-      <button class="copyBtn" onclick="copyScript('s2',this)">COPY SCRIPT</button>
-    </div>
-
-    <!-- PANEL 3 (ADDED) -->
-    <div class="panel">
-      <h2>Taxi Boss Script</h2>
-      <div class="status">ONLINE</div>
-      <div class="creator">Created by Xena</div>
-      <textarea readonly id="s3">loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()</textarea>
-      <button class="copyBtn" onclick="copyScript('s3',this)">COPY SCRIPT</button>
-    </div>
-
-    <!-- MODERATION -->
-    <div class="moderation">
-      <h2>Moderation</h2>
-      OWNER : SHIRO<br>
-      ADMIN : NONE<br>
-      DEVELOPER / CODER : AZAIRO<br>
-      WEBSITE DEVELOPER : KIRO<br>
-      HEAD STAFF : KIRO<br>
-      STAFF : KIRO<br>
-      TRIAL STAFF : NONE
-    </div>
-  </main>
+<div style="text-align:center;margin:25px">
+<button class="btn" onclick="go('page3')">VIEW FEATURES</button>
 </div>
 
-<div id="notify">Script copied!</div>
+<main>
+<div class="panel">
+<h2>Fireworks Playground</h2>
+<p style="color:#00ff66;text-shadow:0 0 12px #00ff66">ONLINE</p>
+</div>
+
+<div class="panel">
+<h2>Piggy Script</h2>
+<p style="color:#00ff66;text-shadow:0 0 12px #00ff66">ONLINE</p>
+</div>
+
+<div class="panel">
+<h2>Taxi Boss Script</h2>
+<p style="color:#00ff66;text-shadow:0 0 12px #00ff66">ONLINE</p>
+</div>
+</main>
+</div>
+
+<!-- PAGE 3 FEATURES -->
+<div id="page3" class="page">
+<button class="btn top-btn" onclick="go('page2')">⬅ BACK</button>
+
+<header>
+<h1>XENA HUB FEATURES</h1>
+</header>
+
+<main>
+<div class="panel">
+<h2>Xena Hub Features</h2>
+<ul>
+<li>AUTO COLLECT ALL CHESTS</li>
+</ul>
+</div>
+
+<div class="panel">
+<h2>Piggy Features</h2>
+<ul>
+<li>TOOLS GUI</li>
+<li>TOOLS GUI FOR BOTH BOOKS</li>
+<li>AUTO FIND PAGES</li>
+<li>WALK SPEED / TELEPORTS TO PLAYER</li>
+<li>AUTO SPAM DOOR</li>
+<li>MORE</li>
+</ul>
+</div>
+
+<div class="panel">
+<h2>Taxi Boss Features</h2>
+<ul>
+<li>AUTO FARM MONEY</li>
+<li>AUTO COLLECT PARTS</li>
+<li>AUTO UPGRADE OFFICE</li>
+<li>AUTO TROPHIES</li>
+<li>AUTO MEDAL</li>
+</ul>
+</div>
+</main>
+</div>
+
+<div id="notify">Done</div>
 
 <script>
-function goNext(){
-  page1.classList.add("fadeOut");
-  setTimeout(()=>{
-    page1.style.display="none";
-    page2.style.display="block";
-  },600);
-}
-
-function copyScript(id,btn){
-  navigator.clipboard.writeText(document.getElementById(id).value);
-  btn.classList.add("copyPulse");
-  setTimeout(()=>btn.classList.remove("copyPulse"),300);
-  notify.style.display="block";
-  setTimeout(()=>notify.style.display="none",2000);
+let current='page1';
+function go(id){
+document.getElementById(current).classList.remove('active');
+document.getElementById(current).classList.add('exit');
+setTimeout(()=>{
+document.getElementById(current).style.display='none';
+document.getElementById(current).classList.remove('exit');
+current=id;
+document.getElementById(id).style.display='block';
+document.getElementById(id).classList.add('active');
+},500);
 }
 
 /* PARTICLES */
 const c=document.getElementById("particles"),x=c.getContext("2d");
 let w,h,p=[];
-function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; }
-resize(); addEventListener("resize",resize);
-
-for(let i=0;i<100;i++){
-  p.push({x:Math.random()*w,y:Math.random()*h,s:Math.random()*2+1,v:Math.random()*0.7+0.3});
-}
-
+function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
+resize();addEventListener("resize",resize);
+for(let i=0;i<120;i++)p.push({x:Math.random()*w,y:Math.random()*h,s:Math.random()*2+1,v:Math.random()+.3});
 function draw(){
-  x.clearRect(0,0,w,h);
-  x.fillStyle="rgba(255,215,0,0.9)";
-  p.forEach(a=>{
-    x.beginPath();
-    x.arc(a.x,a.y,a.s,0,Math.PI*2);
-    x.fill();
-    a.y+=a.v;
-    if(a.y>h)a.y=0;
-  });
-  requestAnimationFrame(draw);
-}
+x.clearRect(0,0,w,h);
+x.fillStyle="rgba(255,215,0,.9)";
+p.forEach(a=>{
+x.beginPath();x.arc(a.x,a.y,a.s,0,Math.PI*2);x.fill();
+a.y+=a.v;if(a.y>h)a.y=0});
+requestAnimationFrame(draw)}
 draw();
 </script>
 
