@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,6 +84,7 @@ grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 gap:30px;
 overflow-y:auto;
 height:calc(100vh - 150px);
+padding-bottom:80px; /* allows full scroll for last panel */
 scrollbar-width:thin;
 scrollbar-color:gold transparent;
 }
@@ -181,7 +183,7 @@ text-align:center
 <div class="status">ONLINE</div>
 <div class="creator">Created by Xena</div>
 <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()</textarea>
-<button class="copyBtn">COPY SCRIPT</button>
+<button class="copyBtn" onclick="copyScript(this.previousElementSibling)">COPY SCRIPT</button>
 </div>
 
 <div class="panel">
@@ -189,7 +191,7 @@ text-align:center
 <div class="status">ONLINE</div>
 <div class="creator">Created by Xena</div>
 <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()</textarea>
-<button class="copyBtn">COPY SCRIPT</button>
+<button class="copyBtn" onclick="copyScript(this.previousElementSibling)">COPY SCRIPT</button>
 </div>
 
 <div class="panel">
@@ -197,7 +199,7 @@ text-align:center
 <div class="status">ONLINE</div>
 <div class="creator">Created by Xena</div>
 <textarea readonly>loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()</textarea>
-<button class="copyBtn">COPY SCRIPT</button>
+<button class="copyBtn" onclick="copyScript(this.previousElementSibling)">COPY SCRIPT</button>
 </div>
 </main>
 </div>
@@ -256,6 +258,13 @@ function go(id){
     setTimeout(()=>{newPage.classList.add('active'); newPage.classList.remove('inactive');},50);
     current=id;
   },300);
+}
+
+/* COPY SCRIPT FUNCTION */
+function copyScript(textarea){
+  navigator.clipboard.writeText(textarea.value);
+  textarea.nextElementSibling.innerText="COPIED!";
+  setTimeout(()=>{textarea.nextElementSibling.innerText="COPY SCRIPT"},1000);
 }
 
 /* PARTICLES */
