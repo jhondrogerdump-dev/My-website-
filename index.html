@@ -8,7 +8,7 @@
 
 <style>
 *{font-family:'Orbitron',sans-serif;box-sizing:border-box;margin:0;padding:0}
-body{background:#000;color:#fff;overflow-x:hidden}
+body{background:#000;color:#fff;overflow:hidden}
 
 /* GRID */
 .grid{
@@ -22,38 +22,61 @@ pointer-events:none;z-index:0}
 /* PARTICLES */
 canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
 
-/* PAGE CONTAINER */
+/* PAGE */
 .page{
 position:fixed;inset:0;
 display:none;
 opacity:0;
-transform:translateY(40px);
-transition:.5s ease;
-z-index:2}
+transform:translateX(100px) scale(0.95);
+transition:.6s ease;
+z-index:2;
+overflow:hidden
+}
 .page.active{
 display:block;
 opacity:1;
-transform:translateY(0)
+transform:translateX(0) scale(1)
 }
 
-/* INTRO PAGE BUTTONS HORIZONTAL */
+/* FLOATING ICON */
+#intro-img{
+width:160px;height:160px;
+border-radius:18px;
+border:3px solid gold;
+box-shadow:0 0 30px gold, 0 0 60px rgba(255,215,0,0.5);
+animation:float 2s ease-in-out infinite
+}
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+100%{transform:translateY(0)}
+}
+
+/* INTRO BUTTONS */
 .intro-buttons{
 display:flex;
 gap:20px;
 justify-content:center;
 margin-top:20px;
 }
-
-/* BUTTON */
 .btn{
 padding:14px 35px;
 border-radius:14px;
 border:none;cursor:pointer;
 background:linear-gradient(90deg,#FFD700,#FFA500);
 color:#000;
-box-shadow:0 0 30px gold;
-transition:.3s}
-.btn:hover{transform:scale(1.1);box-shadow:0 0 60px gold}
+box-shadow:0 0 20px gold;
+transition:all 0.3s ease
+}
+.btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 50px #FFD700,0 0 30px #FFA500;
+animation:glowPulse 0.6s infinite
+}
+@keyframes glowPulse{
+0%,100%{box-shadow:0 0 50px #FFD700,0 0 30px #FFA500}
+50%{box-shadow:0 0 70px #FFD700,0 0 50px #FFA500}
+}
 
 /* HEADER */
 header{
@@ -64,85 +87,69 @@ color:#000;
 box-shadow:0 0 30px gold;
 border-radius:0 0 20px 20px}
 
-/* PANELS */
+/* PANEL STYLES */
 main{
 padding:30px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 gap:30px;
 max-height:calc(100vh - 130px);
-overflow-y:auto;}
-
+overflow-y:auto;
+scrollbar-width:thin;
+scrollbar-color:gold transparent;
+}
+main::-webkit-scrollbar{
+width:8px
+}
+main::-webkit-scrollbar-thumb{
+background:gold;border-radius:8px
+}
 .panel{
 background:#0b0b0b;
 border:2px solid gold;
 border-radius:20px;
 padding:25px;
 box-shadow:0 0 40px rgba(255,215,0,.6);
-transition:.3s}
-.panel:hover{transform:translateY(-6px);box-shadow:0 0 70px gold}
-
+transition:transform .3s, box-shadow .3s}
+.panel:hover{
+transform:translateY(-6px);
+box-shadow:0 0 70px gold
+}
 h2{color:gold;text-shadow:0 0 15px gold}
 .status{color:#00ff66;text-shadow:0 0 12px #00ff66}
 .creator{opacity:.8}
-
-/* TEXTAREA */
 textarea{
 width:100%;height:90px;
-background:#000;
-border:2px solid gold;
-border-radius:12px;
-color:#00ffcc;
-padding:10px;
-resize:none}
-
-/* COPY BUTTON */
+background:#000;border:2px solid gold;border-radius:12px;
+color:#00ffcc;padding:10px;resize:none
+}
 .copyBtn{
-margin-top:12px;width:100%;
-padding:12px;border-radius:12px;
-border:none;cursor:pointer;
-background:linear-gradient(90deg,#FFD700,#FFA500);
-box-shadow:0 0 25px gold}
+margin-top:12px;width:100%;padding:12px;border-radius:12px;border:none;
+cursor:pointer;background:linear-gradient(90deg,#FFD700,#FFA500);
+box-shadow:0 0 25px gold
+}
 
-/* MODERATION BOX */
+/* MODERATION */
 .moderation{
 grid-column:1/-1;
-background:#0a0a0a;
-border:2px solid #ff4444;
-border-radius:20px;
-padding:25px;
+background:#0a0a0a;border:2px solid #ff4444;
+border-radius:20px;padding:25px;
 box-shadow:0 0 40px rgba(255,68,68,.5);
-color:#ff4444;
-text-shadow:0 0 10px #ff4444}
-
-/* FLOATING IMAGE */
-#intro-img{
-width:160px;
-height:160px;
-border-radius:18px;
-border:3px solid gold;
-box-shadow:0 0 40px gold;
-animation:float 2s ease-in-out infinite;
+color:#ff4444;text-shadow:0 0 12px #ff4444
 }
 
-@keyframes float{
-0%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
-100%{transform:translateY(0);}
-}
-
-ul li{
-margin:8px 0;
-color:#00ffcc;
-text-shadow:0 0 12px #00ffcc}
-
-/* TOP ACTIONS BUTTONS */
+/* TOP ACTIONS */
 .actions{
 text-align:center;
 margin:20px;
-display:flex;
-gap:15px;
-justify-content:center}
+display:flex;gap:15px;
+justify-content:center
+}
+
+/* FEATURES LIST */
+ul li{
+margin:8px 0;color:#00ffcc;text-shadow:0 0 12px #00ffcc
+}
 </style>
 </head>
 
@@ -175,7 +182,7 @@ justify-content:center}
 </div>
 
 <main>
-<!-- PANEL 1 -->
+<!-- SCRIPT 1 -->
 <div class="panel">
 <h2>Fireworks Playground Beta Script</h2>
 <div class="status">ONLINE</div>
@@ -184,7 +191,7 @@ justify-content:center}
 <button class="copyBtn">COPY SCRIPT</button>
 </div>
 
-<!-- PANEL 2 -->
+<!-- SCRIPT 2 -->
 <div class="panel">
 <h2>Piggy Script</h2>
 <div class="status">ONLINE</div>
@@ -193,7 +200,7 @@ justify-content:center}
 <button class="copyBtn">COPY SCRIPT</button>
 </div>
 
-<!-- PANEL 3 -->
+<!-- SCRIPT 3 -->
 <div class="panel">
 <h2>Taxi Boss Script</h2>
 <div class="status">ONLINE</div>
@@ -229,9 +236,7 @@ TRIAL STAFF : NONE
 <main>
 <div class="panel">
 <h2>Xena Hub Features</h2>
-<ul>
-<li>AUTO COLLECT ALL CHESTS</li>
-</ul>
+<ul><li>AUTO COLLECT ALL CHESTS</li></ul>
 </div>
 
 <div class="panel">
@@ -263,14 +268,17 @@ TRIAL STAFF : NONE
 let current='page1';
 function go(id){
 document.getElementById(current).classList.remove('active');
+document.getElementById(current).style.transform="translateX(-50px) scale(0.95)";
+document.getElementById(current).style.opacity="0";
 setTimeout(()=>{
 document.getElementById(current).style.display='none';
 current=id;
-document.getElementById(id).style.display='block';
-document.getElementById(id).classList.add('active');
-},200);
+let newPage=document.getElementById(id);
+newPage.style.display='block';
+setTimeout(()=>{newPage.classList.add('active');},50);
+},300);
 
-/* Optional: page transition animation can be enhanced further */
+/* page transition: slide+fade+scale for cool effect */
 }
 
 /* PARTICLES */
