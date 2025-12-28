@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +53,7 @@ animation:float 2s ease-in-out infinite
 100%{transform:translateY(0)}
 }
 
-/* INTRO BUTTONS */
+/* BUTTONS */
 .intro-buttons{
 display:flex;
 gap:20px;
@@ -129,15 +130,6 @@ cursor:pointer;background:linear-gradient(90deg,#FFD700,#FFA500);
 box-shadow:0 0 25px gold
 }
 
-/* MODERATION */
-.moderation{
-grid-column:1/-1;
-background:#0a0a0a;border:2px solid #ff4444;
-border-radius:20px;padding:25px;
-box-shadow:0 0 40px rgba(255,68,68,.5);
-color:#ff4444;text-shadow:0 0 12px #ff4444
-}
-
 /* TOP ACTIONS */
 .actions{
 text-align:center;
@@ -149,6 +141,15 @@ justify-content:center
 /* FEATURES LIST */
 ul li{
 margin:8px 0;color:#00ffcc;text-shadow:0 0 12px #00ffcc
+}
+
+/* MODERATION BOX */
+.moderation{
+background:#0a0a0a;border:2px solid #ff4444;
+border-radius:20px;padding:25px;margin-top:30px;
+box-shadow:0 0 40px rgba(255,68,68,.5);
+color:#ff4444;text-shadow:0 0 12px #ff4444;
+text-align:center
 }
 </style>
 </head>
@@ -165,6 +166,18 @@ margin:8px 0;color:#00ffcc;text-shadow:0 0 12px #00ffcc
     <div class="intro-buttons">
       <button class="btn" onclick="go('page2')">CONTINUE</button>
       <button class="btn" onclick="window.open('https://discord.gg/cthehdHSpG','_blank')">DISCORD</button>
+    </div>
+
+    <!-- MODERATION BOX MOVED TO PAGE 1 -->
+    <div class="moderation">
+      <h2>Moderation</h2>
+      OWNER : SHIRO<br>
+      ADMIN : NONE<br>
+      DEVELOPER / CODER : AZAIRO<br>
+      WEBSITE DEVELOPER : KIRO<br>
+      HEAD STAFF : KIRO<br>
+      STAFF : KIRO<br>
+      TRIAL STAFF : NONE
     </div>
   </div>
 </div>
@@ -207,18 +220,6 @@ margin:8px 0;color:#00ffcc;text-shadow:0 0 12px #00ffcc
 <div class="creator">Created by Xena</div>
 <textarea readonly>loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()</textarea>
 <button class="copyBtn">COPY SCRIPT</button>
-</div>
-
-<!-- MODERATION -->
-<div class="moderation">
-<h2>Moderation</h2>
-OWNER : SHIRO<br>
-ADMIN : NONE<br>
-DEVELOPER / CODER : AZAIRO<br>
-WEBSITE DEVELOPER : KIRO<br>
-HEAD STAFF : KIRO<br>
-STAFF : KIRO<br>
-TRIAL STAFF : NONE
 </div>
 </main>
 </div>
@@ -267,24 +268,27 @@ TRIAL STAFF : NONE
 <script>
 let current='page1';
 function go(id){
-document.getElementById(current).classList.remove('active');
-document.getElementById(current).style.transform="translateX(-50px) scale(0.95)";
-document.getElementById(current).style.opacity="0";
-setTimeout(()=>{
-document.getElementById(current).style.display='none';
-current=id;
-let newPage=document.getElementById(id);
-newPage.style.display='block';
-setTimeout(()=>{newPage.classList.add('active');},50);
-},300);
+  // Hide current page with smooth animation
+  const curPage=document.getElementById(current);
+  curPage.style.transform="translateX(-50px) scale(0.95)";
+  curPage.style.opacity="0";
 
-/* page transition: slide+fade+scale for cool effect */
+  setTimeout(()=>{
+    curPage.classList.remove('active');
+    curPage.style.display='none';
+
+    // Show target page
+    current=id;
+    const newPage=document.getElementById(id);
+    newPage.style.display='block';
+    setTimeout(()=>{newPage.classList.add('active');},50);
+  },300);
 }
 
 /* PARTICLES */
 const c=document.querySelector("canvas"),x=c.getContext("2d");
 let w,h,p=[];
-function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
+function resize(){w=c.width=innerWidth;h=c.height=innerHeight;}
 resize();addEventListener("resize",resize);
 for(let i=0;i<120;i++)p.push({x:Math.random()*w,y:Math.random()*h,s:Math.random()*2+1,v:Math.random()+.3});
 function draw(){
