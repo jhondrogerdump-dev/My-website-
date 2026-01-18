@@ -1,286 +1,175 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Xena Hub</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
-<style>
-*{font-family:'Orbitron',sans-serif;box-sizing:border-box;margin:0;padding:0}
-body{background:#000;color:#fff;overflow:hidden;height:100vh}
-
-/* GRID */
-.grid{
-position:fixed;inset:0;
-background:
-linear-gradient(rgba(255,215,0,.1)1px,transparent 1px),
-linear-gradient(90deg,rgba(255,215,0,.1)1px,transparent 1px);
-background-size:40px 40px;
-pointer-events:none;z-index:0}
-
-/* PARTICLES */
-canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
-
-/* PAGES */
-.page{
-position:absolute;inset:0;
-display:none;
-opacity:0;
-transition:opacity 0.4s ease, transform 0.4s ease;
-overflow:hidden;
-z-index:2;
-}
-.page.active{display:block;opacity:1;transform:translateX(0)}
-.page.inactive{transform:translateX(-50px) scale(0.95);opacity:0;}
-
-/* FLOATING ICON */
-#intro-img{
-width:160px;height:160px;
-border-radius:18px;
-border:3px solid gold;
-box-shadow:0 0 30px gold,0 0 60px rgba(255,215,0,0.5);
-animation:float 2s ease-in-out infinite
-}
-@keyframes float{
-0%{transform:translateY(0)}
-50%{transform:translateY(-12px)}
-100%{transform:translateY(0)}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xena Hub | Roblox Script Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow: #ffd600;
+      --yellow-glow: rgba(255, 214, 0, 0.45);
+      --dark: #0b0b0b;
+      --card: #141414;
+    }* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
-/* INTRO BUTTONS */
-.intro-buttons{
-display:flex;gap:20px;justify-content:center;margin-top:20px
-}
-.btn{
-padding:14px 35px;border-radius:14px;border:none;cursor:pointer;
-background:linear-gradient(90deg,#FFD700,#FFA500);
-color:#000;box-shadow:0 0 20px gold;
-transition:all 0.3s ease
-}
-.btn:hover{
-transform:scale(1.1);
-box-shadow:0 0 50px #FFD700,0 0 30px #FFA500;
-animation:glowPulse 0.6s infinite
-}
-@keyframes glowPulse{
-0%,100%{box-shadow:0 0 50px #FFD700,0 0 30px #FFA500}
-50%{box-shadow:0 0 70px #FFD700,0 0 50px #FFA500}
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  color: white;
 }
 
-/* HEADER */
-header{
-text-align:center;padding:30px;
-background:linear-gradient(90deg,#FFD700,#FFA500);
-color:#000;
-box-shadow:0 0 30px gold;
-border-radius:0 0 20px 20px}
-
-/* PANEL STYLES */
-main{
-padding:30px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:30px;
-overflow-y:auto;
-height:calc(100vh - 150px);
-padding-bottom:80px; /* allows full scroll for last panel */
-scrollbar-width:thin;
-scrollbar-color:gold transparent;
-}
-main::-webkit-scrollbar{width:8px}
-main::-webkit-scrollbar-thumb{background:gold;border-radius:8px}
-
-.panel{
-background:#0b0b0b;
-border:2px solid gold;
-border-radius:20px;
-padding:25px;
-box-shadow:0 0 40px rgba(255,215,0,.6);
-transition:transform .3s, box-shadow .3s
-}
-.panel:hover{
-transform:translateY(-6px);
-box-shadow:0 0 70px gold
-}
-h2{color:gold;text-shadow:0 0 15px gold}
-.status{color:#00ff66;text-shadow:0 0 12px #00ff66}
-.creator{opacity:.8}
-textarea{
-width:100%;height:90px;
-background:#000;border:2px solid gold;border-radius:12px;
-color:#00ffcc;padding:10px;resize:none
-}
-.copyBtn{
-margin-top:12px;width:100%;padding:12px;border-radius:12px;border:none;
-cursor:pointer;background:linear-gradient(90deg,#FFD700,#FFA500);
-box-shadow:0 0 25px gold
+header {
+  padding: 80px 20px 60px;
+  text-align: center;
 }
 
-/* TOP ACTIONS */
-.actions{
-text-align:center;margin:20px;
-display:flex;gap:15px;justify-content:center
+header h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--yellow);
+  text-shadow: 0 0 25px var(--yellow-glow);
 }
 
-/* FEATURES LIST */
-ul li{
-margin:8px 0;color:#00ffcc;text-shadow:0 0 12px #00ffcc
+header p {
+  color: #cfcfcf;
+  max-width: 600px;
+  margin: 20px auto 0;
+  line-height: 1.6;
 }
 
-/* MODERATION BOX */
-.moderation{
-background:#0a0a0a;border:2px solid #ff4444;
-border-radius:20px;padding:25px;margin-top:30px;
-box-shadow:0 0 40px rgba(255,68,68,.5);
-color:#ff4444;text-shadow:0 0 12px #ff4444;
-text-align:center
+.buttons {
+  margin-top: 35px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-</style>
+
+.btn {
+  padding: 14px 32px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn.primary {
+  background: var(--yellow);
+  color: black;
+  box-shadow: 0 0 25px var(--yellow-glow);
+}
+
+.btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 40px var(--yellow-glow);
+}
+
+.btn.secondary {
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+}
+
+.btn.secondary:hover {
+  background: var(--yellow);
+  color: black;
+}
+
+section {
+  padding: 70px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background: linear-gradient(180deg, #181818, #0f0f0f);
+  border-radius: 18px;
+  padding: 30px;
+  border: 1px solid #222;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--yellow);
+  box-shadow: 0 0 30px var(--yellow-glow);
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  color: var(--yellow);
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: #bdbdbd;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.script-box {
+  margin-top: 50px;
+  background: #0d0d0d;
+  border-radius: 16px;
+  border: 1px solid #222;
+  padding: 25px;
+  font-family: monospace;
+  color: var(--yellow);
+  overflow-x: auto;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+footer {
+  padding: 40px 20px;
+  text-align: center;
+  color: #777;
+  border-top: 1px solid #1c1c1c;
+}
+
+footer span {
+  color: var(--yellow);
+}
+
+  </style>
 </head>
-<body>
-
-<div class="grid"></div>
-<canvas id="particles"></canvas>
-
-<!-- PAGE 1 -->
-<div id="page1" class="page active">
-  <div style="height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px">
-    <img id="intro-img" src="standard (13).gif">
-    <div class="intro-buttons">
-      <button class="btn" onclick="go('page2')">CONTINUE</button>
-      <button class="btn" onclick="window.open('https://discord.gg/cthehdHSpG','_blank')">DISCORD</button>
-    </div>
-    <!-- MODERATION BOX -->
-    <div class="moderation">
-      <h2>Moderation</h2>
-      OWNER : SHIRO<br>
-      ADMIN : NONE<br>
-      DEVELOPER / CODER : AZAIRO<br>
-      WEBSITE DEVELOPER : KIRO<br>
-      HEAD STAFF : KIRO<br>
-      STAFF : KIRO<br>
-      TRIAL STAFF : NONE
-    </div>
-  </div>
+<body>  <header>
+    <h1>XENA HUB</h1>
+    <p>A clean, powerful, and keyless Roblox script hub.
+       Designed for exploiters who want speed, stability, and style.</p><div class="buttons">
+  <a href="#script" class="btn primary">Get Script</a>
+  <a href="https://discord.gg/JguCsgRP7k" target="_blank" class="btn secondary">Join Discord</a>
 </div>
 
-<!-- PAGE 2 -->
-<div id="page2" class="page">
-<header>
-<h1>Xena Hub Main Page</h1>
-<p style="text-shadow:0 0 15px #FFA500">Script Loader</p>
-</header>
+  </header>  <section>
+    <div class="grid">
+      <div class="card">
+        <h3>⚡ Fast Execution</h3>
+        <p>Optimized scripts that run smoothly on most Roblox executors.</p>
+      </div>
+      <div class="card">
+        <h3>🔑 Keyless</h3>
+        <p>No annoying linkvertise or keys. Inject and play instantly.</p>
+      </div>
+      <div class="card">
+        <h3>🛡️ Secure</h3>
+        <p>Regular updates to reduce detection and patch exploits.</p>
+      </div>
+      <div class="card">
+        <h3>🎨 Aesthetic UI</h3>
+        <p>Yellow neon themed interface designed to look clean and modern.</p>
+      </div>
+    </div><div id="script" class="script-box">
 
-<div class="actions">
-<button class="btn" onclick="go('page3')">VIEW FEATURES</button>
-<button class="btn" onclick="go('page1')">BACK</button>
-</div>
+<pre>loadstring(game:HttpGet("PUT_YOUR_SCRIPT_LINK_HERE"))()</pre></div>
 
-<main>
-<div class="panel">
-<h2>Fireworks Playground Beta Script</h2>
-<div class="status">ONLINE</div>
-<div class="creator">Created by Xena</div>
-<textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20fireworks%20playground%20Beta"))()</textarea>
-<button class="copyBtn" onclick="copyScript(this.previousElementSibling)">COPY SCRIPT</button>
-</div>
-
-<div class="panel">
-<h2>Piggy Script</h2>
-<div class="status">ONLINE</div>
-<div class="creator">Created by Xena</div>
-<textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/jhondrogerdump-dev/Xenahub/refs/heads/main/Xena%20hub%20piggy"))()</textarea>
-<button class="copyBtn" onclick="copyScript(this.previousElementSibling)">COPY SCRIPT</button>
-</div>
-
-<div class="panel">
-<h2>Taxi Boss Script</h2>
-<div class="status">ONLINE</div>
-<div class="creator">Created by Xena</div>
-<textarea readonly>loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()</textarea>
-<button class="copyBtn" onclick="copyScript(this.previousElementSibling)">COPY SCRIPT</button>
-</div>
-</main>
-</div>
-
-<!-- PAGE 3 FEATURES -->
-<div id="page3" class="page">
-<header>
-<h1>XENA HUB FEATURES</h1>
-</header>
-
-<div class="actions">
-<button class="btn" onclick="go('page2')">BACK TO MAIN</button>
-</div>
-
-<main>
-<div class="panel">
-<h2>Xena Hub Features</h2>
-<ul><li>AUTO COLLECT ALL CHESTS</li></ul>
-</div>
-
-<div class="panel">
-<h2>Piggy Features</h2>
-<ul>
-<li>TOOLS GUI</li>
-<li>TOOLS GUI FOR BOTH BOOKS</li>
-<li>AUTO FIND PAGES</li>
-<li>WALK SPEED / TELEPORT</li>
-<li>AUTO SPAM DOOR</li>
-<li>MORE</li>
-</ul>
-</div>
-
-<div class="panel">
-<h2>Taxi Boss Features</h2>
-<ul>
-<li>AUTO FARM MONEY</li>
-<li>AUTO COLLECT PARTS</li>
-<li>AUTO UPGRADE OFFICE</li>
-<li>AUTO TROPHIES</li>
-<li>AUTO MEDAL</li>
-</ul>
-</div>
-</main>
-</div>
-
-<script>
-let current='page1';
-function go(id){
-  document.getElementById(current).classList.remove('active');
-  document.getElementById(current).classList.add('inactive');
-  
-  setTimeout(()=>{
-    document.getElementById(current).style.display='none';
-    const newPage=document.getElementById(id);
-    newPage.style.display='block';
-    setTimeout(()=>{newPage.classList.add('active'); newPage.classList.remove('inactive');},50);
-    current=id;
-  },300);
-}
-
-/* COPY SCRIPT FUNCTION */
-function copyScript(textarea){
-  navigator.clipboard.writeText(textarea.value);
-  textarea.nextElementSibling.innerText="COPIED!";
-  setTimeout(()=>{textarea.nextElementSibling.innerText="COPY SCRIPT"},1000);
-}
-
-/* PARTICLES */
-const c=document.querySelector("canvas"),x=c.getContext("2d");
-let w,h,p=[];
-function resize(){w=c.width=innerWidth;h=c.height=innerHeight;}
-resize();addEventListener("resize",resize);
-for(let i=0;i<120;i++)p.push({x:Math.random()*w,y:Math.random()*h,s:Math.random()*2+1,v:Math.random()+.3});
-function draw(){
-x.clearRect(0,0,w,h);
-x.fillStyle="rgba(255,215,0,.9)";
-p.forEach(a=>{
-x.beginPath();x.arc(a.x,a.y,a.s,0,Math.PI*2);x.fill();
-a.y+=a.v;if(a.y>h)a.y=0});
-requestAnimationFrame(draw)}
-draw();
-</script>
-</body>
+  </section>  <footer>
+    © 2026 <span>Xena Hub</span> — Not affiliated with Roblox Corporation.
+  </footer></body>
 </html>
