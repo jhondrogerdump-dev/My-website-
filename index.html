@@ -3,173 +3,172 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Xena Hub | Roblox Script Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --yellow: #ffd600;
-      --yellow-glow: rgba(255, 214, 0, 0.45);
-      --dark: #0b0b0b;
-      --card: #141414;
-    }* {
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
+      --yellow: #ffe600;
+      --glow: rgba(255, 230, 0, 0.6);
+      --bg: #050505;
+      --panel: #101010;
+    }* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: radial-gradient(circle at top, #1a1a1a, #000);
-  color: white;
+  background: radial-gradient(circle at top, #1a1a1a, var(--bg));
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
 }
 
 header {
-  padding: 80px 20px 60px;
+  padding: 90px 20px 70px;
   text-align: center;
 }
 
 header h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
+  font-size: 4rem;
   color: var(--yellow);
-  text-shadow: 0 0 25px var(--yellow-glow);
+  text-shadow: 0 0 30px var(--glow);
+  letter-spacing: 4px;
 }
 
 header p {
-  color: #cfcfcf;
-  max-width: 600px;
-  margin: 20px auto 0;
+  max-width: 650px;
+  margin: 25px auto 0;
+  color: #ccc;
   line-height: 1.6;
 }
 
-.buttons {
-  margin-top: 35px;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 .btn {
-  padding: 14px 32px;
-  border-radius: 30px;
+  display: inline-block;
+  margin-top: 40px;
+  padding: 16px 38px;
+  border-radius: 40px;
+  background: var(--yellow);
+  color: #000;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 0 35px var(--glow);
   transition: 0.3s ease;
 }
 
-.btn.primary {
-  background: var(--yellow);
-  color: black;
-  box-shadow: 0 0 25px var(--yellow-glow);
-}
-
-.btn.primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 40px var(--yellow-glow);
-}
-
-.btn.secondary {
-  border: 2px solid var(--yellow);
-  color: var(--yellow);
-}
-
-.btn.secondary:hover {
-  background: var(--yellow);
-  color: black;
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 55px var(--glow);
 }
 
 section {
   padding: 70px 20px;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
 }
 
-.grid {
+.panels {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
 }
 
-.card {
-  background: linear-gradient(180deg, #181818, #0f0f0f);
-  border-radius: 18px;
+.panel {
+  background: linear-gradient(180deg, #151515, #0a0a0a);
+  border-radius: 22px;
   padding: 30px;
   border: 1px solid #222;
+  box-shadow: inset 0 0 20px #000;
   transition: 0.3s ease;
+  position: relative;
 }
 
-.card:hover {
+.panel:hover {
   border-color: var(--yellow);
-  box-shadow: 0 0 30px var(--yellow-glow);
-  transform: translateY(-5px);
+  box-shadow: 0 0 40px var(--glow);
+  transform: translateY(-8px);
 }
 
-.card h3 {
+.panel h3 {
   color: var(--yellow);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
-.card p {
-  color: #bdbdbd;
-  font-size: 0.95rem;
-  line-height: 1.5;
+.status {
+  font-size: 0.85rem;
+  margin-bottom: 15px;
 }
 
-.script-box {
-  margin-top: 50px;
-  background: #0d0d0d;
-  border-radius: 16px;
-  border: 1px solid #222;
-  padding: 25px;
-  font-family: monospace;
-  color: var(--yellow);
+.working { color: #6aff6a; }
+.patched { color: #ff5c5c; }
+
+pre {
+  background: #000;
+  padding: 15px;
+  border-radius: 14px;
   overflow-x: auto;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+  font-size: 0.75rem;
+  color: var(--yellow);
+  border: 1px solid #222;
+}
+
+.copy-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: var(--yellow);
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 20px var(--glow);
+  transition: 0.25s ease;
+}
+
+.copy-btn:hover {
+  box-shadow: 0 0 40px var(--glow);
 }
 
 footer {
-  padding: 40px 20px;
   text-align: center;
+  padding: 45px 20px;
   color: #777;
   border-top: 1px solid #1c1c1c;
 }
 
-footer span {
-  color: var(--yellow);
-}
-
   </style>
 </head>
-<body>  <header>
-    <h1>XENA HUB</h1>
-    <p>A clean, powerful, and keyless Roblox script hub.
-       Designed for exploiters who want speed, stability, and style.</p><div class="buttons">
-  <a href="#script" class="btn primary">Get Script</a>
-  <a href="https://discord.gg/JguCsgRP7k" target="_blank" class="btn secondary">Join Discord</a>
+<body><header>
+  <h1>XENA HUB</h1>
+  <p>High-quality Roblox exploit scripts with a clean yellow neon aesthetic.
+     Keyless, powerful, and constantly evolving.</p>
+  <a href="#scripts" class="btn">GET SCRIPTS</a>
+</header><section id="scripts">
+  <div class="panels"><div class="panel">
+  <h3>🚛 Diesel N Steel</h3>
+  <div class="status working">• Keyless • Working</div>
+  <pre id="script1">loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/1552970c67caf8690f5ef9b22a2925cc54ba6760d8e0b165fcd5cee7f71beeb7/download"))()</pre>
+  <button class="copy-btn" onclick="copy('script1')">COPY SCRIPT</button>
 </div>
 
-  </header>  <section>
-    <div class="grid">
-      <div class="card">
-        <h3>⚡ Fast Execution</h3>
-        <p>Optimized scripts that run smoothly on most Roblox executors.</p>
-      </div>
-      <div class="card">
-        <h3>🔑 Keyless</h3>
-        <p>No annoying linkvertise or keys. Inject and play instantly.</p>
-      </div>
-      <div class="card">
-        <h3>🛡️ Secure</h3>
-        <p>Regular updates to reduce detection and patch exploits.</p>
-      </div>
-      <div class="card">
-        <h3>🎨 Aesthetic UI</h3>
-        <p>Yellow neon themed interface designed to look clean and modern.</p>
-      </div>
-    </div><div id="script" class="script-box">
+<div class="panel">
+  <h3>🚕 Taxi Boss</h3>
+  <div class="status working">• Keyless • Working</div>
+  <pre id="script2">loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()</pre>
+  <button class="copy-btn" onclick="copy('script2')">COPY SCRIPT</button>
+</div>
 
-<pre>loadstring(game:HttpGet("PUT_YOUR_SCRIPT_LINK_HERE"))()</pre></div>
+<div class="panel">
+  <h3>🧠 Tambay Heneral</h3>
+  <div class="status patched">• Keyless • Patched</div>
+  <pre id="script3">loadstring(game:HttpGet("https://pandadevelopment.net/virtual/file/5ff8cdd0fd7594ad"))()</pre>
+  <button class="copy-btn" onclick="copy('script3')">COPY SCRIPT</button>
+</div>
 
-  </section>  <footer>
-    © 2026 <span>Xena Hub</span> — Not affiliated with Roblox Corporation.
-  </footer></body>
-</html>
+  </div>
+</section><footer>
+  © 2026 Xena Hub — Not affiliated with Roblox Corporation.
+</footer><script>
+  function copy(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text);
+    alert('Script copied!');
+  }
+</script></body>
+</html> 
