@@ -6,12 +6,7 @@
   <title>VØID X EXPLOITS</title>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
       background: #0d0015;
       color: #e0ccff;
@@ -19,14 +14,12 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-
     #particles-js {
       position: fixed;
       width: 100%;
       height: 100%;
       z-index: 1;
     }
-
     .container {
       position: relative;
       z-index: 10;
@@ -34,114 +27,152 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-
     h1 {
       text-align: center;
-      font-size: 3.8rem;
+      font-size: 3.6rem;
       font-weight: 900;
-      letter-spacing: 8px;
-      margin-bottom: 50px;
+      letter-spacing: 6px;
+      margin-bottom: 30px;
       background: linear-gradient(90deg, #c084fc, #a855f7, #d8b4fe);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(168, 85, 247, 0.7);
+      text-shadow: 0 0 30px rgba(168,85,247,0.7);
       animation: glow 3s ease-in-out infinite alternate;
     }
-
     @keyframes glow {
       from { text-shadow: 0 0 20px rgba(168,85,247,0.6), 0 0 40px rgba(168,85,247,0.4); }
       to   { text-shadow: 0 0 40px rgba(168,85,247,0.9), 0 0 80px rgba(168,85,247,0.6); }
     }
 
+    /* Navigation */
+    .nav {
+      text-align: center;
+      margin-bottom: 50px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      background: linear-gradient(90deg, #7c3aed, #a855f7);
+      color: white;
+      border: none;
+      padding: 16px 42px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.35s;
+      box-shadow: 0 8px 25px rgba(168,85,247,0.55);
+      min-width: 220px;
+    }
+    .nav-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(168,85,247,0.75);
+      background: linear-gradient(90deg, #a855f7, #c084fc);
+    }
+    .nav-btn.active {
+      background: linear-gradient(90deg, #c084fc, #d8b4fe);
+      box-shadow: 0 12px 35px rgba(216,180,254,0.6);
+      transform: scale(1.08);
+    }
+
+    /* Pages */
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.4rem;
+      margin: 50px 0 30px;
+      color: #d8b4fe;
+      text-shadow: 0 0 20px rgba(216,180,254,0.6);
+    }
+
     .panels {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 28px;
       padding: 20px;
     }
 
     .card {
-      background: rgba(30, 10, 60, 0.45);
-      border: 1px solid rgba(168, 85, 247, 0.35);
+      background: rgba(30, 10, 60, 0.48);
+      border: 1px solid rgba(168, 85, 247, 0.38);
       border-radius: 16px;
-      padding: 28px 24px;
+      padding: 26px 22px;
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5),
-                  inset 0 0 20px rgba(168,85,247,0.12);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.55), inset 0 0 20px rgba(168,85,247,0.14);
       transition: all 0.35s ease;
     }
-
     .card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-10px);
       border-color: #c084fc;
-      box-shadow: 0 20px 50px rgba(168,85,247,0.35),
-                  inset 0 0 30px rgba(168,85,247,0.18);
+      box-shadow: 0 22px 55px rgba(168,85,247,0.4), inset 0 0 30px rgba(168,85,247,0.2);
     }
-
     .card h2 {
-      font-size: 2.1rem;
-      margin-bottom: 16px;
+      font-size: 2rem;
+      margin-bottom: 14px;
       color: #d8b4fe;
       text-shadow: 0 0 15px rgba(216,180,254,0.7);
     }
-
     .status {
       font-size: 1.1rem;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       font-weight: 600;
     }
-
     .status.online {
       color: #34d399;
-      text-shadow: 0 0 12px rgba(52, 211, 153, 0.7);
+      text-shadow: 0 0 12px rgba(52,211,153,0.75);
     }
-
     .script-code {
-      background: rgba(15, 5, 40, 0.7);
+      background: rgba(15, 5, 40, 0.75);
       border: 1px solid #6b21a8;
       border-radius: 10px;
       padding: 16px;
-      font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 0.96rem;
+      font-family: 'Consolas', monospace;
+      font-size: 0.95rem;
       color: #c4b5fd;
-      margin: 20px 0;
+      margin: 18px 0;
       white-space: pre-wrap;
       word-break: break-all;
-      box-shadow: inset 0 2px 10px rgba(0,0,0,0.6);
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.65);
     }
-
-    .copy-btn {
+    .btn {
       background: linear-gradient(90deg, #7c3aed, #a855f7);
       color: white;
       border: none;
-      padding: 12px 28px;
-      font-size: 1.05rem;
+      padding: 12px 32px;
+      font-size: 1.1rem;
       font-weight: 600;
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s;
       box-shadow: 0 6px 20px rgba(168,85,247,0.5);
       display: block;
-      margin: 16px auto 0;
+      margin: 20px auto 0;
+      text-decoration: none;
+      text-align: center;
     }
-
-    .copy-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(168,85,247,0.7);
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 35px rgba(168,85,247,0.7);
       background: linear-gradient(90deg, #a855f7, #c084fc);
     }
-
-    .copy-btn:active {
-      transform: translateY(1px);
+    .copy-btn {
+      width: 180px;
     }
-
     footer {
       text-align: center;
-      margin-top: 60px;
-      padding: 20px;
+      margin-top: 80px;
+      padding: 25px;
       color: #a78bfa;
       font-size: 0.95rem;
-      opacity: 0.8;
+      opacity: 0.85;
     }
   </style>
 </head>
@@ -150,97 +181,126 @@
   <div id="particles-js"></div>
 
   <div class="container">
+
     <h1>VØID X EXPLOITS</h1>
 
-    <div class="panels">
+    <div class="nav">
+      <button class="nav-btn active" onclick="showPage('scripts')">Scripts</button>
+      <button class="nav-btn" onclick="showPage('executors')">Executors</button>
+    </div>
 
-      <!-- Script 1 -->
-      <div class="card">
-        <h2>Diesel n Steel Script</h2>
-        <div class="status online">Status: Online</div>
+    <!-- ── SCRIPTS PAGE ─────────────────────────────────────── -->
+    <div id="scripts" class="page active">
 
-        <div class="script-code" id="script1">
+      <div class="panels">
+
+        <div class="card">
+          <h2>Diesel n Steel Script</h2>
+          <div class="status online">Status: Online</div>
+          <div class="script-code" id="script1">
 loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/1552970c67caf8690f5ef9b22a2925cc54ba6760d8e0b165fcd5cee7f71beeb7/download"))()
+          </div>
+          <button class="btn copy-btn" onclick="copyToClipboard('script1')">Copy Script</button>
         </div>
 
-        <button class="copy-btn" onclick="copyToClipboard('script1')">Copy Script</button>
+        <div class="card">
+          <h2>Taxi Boss Script</h2>
+          <div class="status online">Status: Online</div>
+          <div class="script-code" id="script2">
+loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()
+          </div>
+          <button class="btn copy-btn" onclick="copyToClipboard('script2')">Copy Script</button>
+        </div>
+
       </div>
 
-      <!-- Script 2 -->
-      <div class="card">
-        <h2>Taxi Boss Script</h2>
-        <div class="status online">Status: Online</div>
+    </div>
 
-        <div class="script-code" id="script2">
-loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()
+    <!-- ── EXECUTORS PAGE ───────────────────────────────────── -->
+    <div id="executors" class="page">
+
+      <h2 class="section-title">Mobile Executors</h2>
+      <div class="panels">
+
+        <div class="card">
+          <h2>Delta Executor [Android]</h2>
+          <a href="https://deltaexploits.gg/delta-executor-android" target="_blank" class="btn">Open Link</a>
         </div>
 
-        <button class="copy-btn" onclick="copyToClipboard('script2')">Copy Script</button>
+        <div class="card">
+          <h2>Fluxus Z Executor [Mobile / Android]</h2>
+          <a href="https://www.mediafire.com/file/nacmh2iymo3k8wx/FluxusZ+V3.9.4+ARM64.apk/file" target="_blank" class="btn">Open Link</a>
+        </div>
+
+      </div>
+
+      <h2 class="section-title">PC Executors</h2>
+      <div class="panels">
+
+        <div class="card">
+          <h2>Volcano Executor</h2>
+          <a href="https://volcano.wtf/" target="_blank" class="btn">Open Link</a>
+        </div>
+
+        <div class="card">
+          <h2>Xeno Executor</h2>
+          <a href="https://www.xeno.onl/download" target="_blank" class="btn">Open Link</a>
+        </div>
+
+        <div class="card">
+          <h2>Bunni.lol</h2>
+          <a href="https://gofile.io/d/JzrHU7" target="_blank" class="btn">Open Link</a>
+        </div>
+
       </div>
 
     </div>
 
     <footer>use at your own risk • 2025–2026</footer>
+
   </div>
 
   <script>
-    // Particles.js purple theme
+    // Page switch
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    // Particles
     particlesJS("particles-js", {
       "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 900 } },
-        "color": { "value": "#a855f7" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.55, "random": true },
-        "size": { "value": 3.5, "random": true },
-        "line_linked": {
-          "enable": true,
-          "distance": 140,
-          "color": "#c084fc",
-          "opacity": 0.35,
-          "width": 1.2
-        },
-        "move": {
-          "enable": true,
-          "speed": 2.5,
-          "direction": "none",
-          "random": true,
-          "straight": false,
-          "out_mode": "out",
-          "bounce": false
-        }
+        "number": {"value": 80, "density": {"enable": true, "value_area": 900}},
+        "color": {"value": "#a855f7"},
+        "shape": {"type": "circle"},
+        "opacity": {"value": 0.55, "random": true},
+        "size": {"value": 3.5, "random": true},
+        "line_linked": {"enable": true, "distance": 140, "color": "#c084fc", "opacity": 0.35, "width": 1.2},
+        "move": {"enable": true, "speed": 2.5, "direction": "none", "random": true, "straight": false, "out_mode": "out"}
       },
       "interactivity": {
         "detect_on": "canvas",
-        "events": {
-          "onhover": { "enable": true, "mode": "grab" },
-          "onclick": { "enable": true, "mode": "push" },
-          "resize": true
-        },
-        "modes": {
-          "grab": { "distance": 160, "line_linked": { "opacity": 0.7 } },
-          "push": { "particles_nb": 4 }
-        }
+        "events": {"onhover": {"enable": true, "mode": "grab"}, "onclick": {"enable": true, "mode": "push"}, "resize": true},
+        "modes": {"grab": {"distance": 160, "line_linked": {"opacity": 0.7}}, "push": {"particles_nb": 4}}
       },
       "retina_detect": true
     });
 
-    // Copy to clipboard function
+    // Copy script
     function copyToClipboard(elementId) {
-      const textElement = document.getElementById(elementId);
-      const text = textElement.innerText.trim();
-
+      const text = document.getElementById(elementId).innerText.trim();
       navigator.clipboard.writeText(text).then(() => {
-        const btn = textElement.nextElementSibling;
-        const originalText = btn.innerText;
+        const btn = event.target;
+        const original = btn.innerText;
         btn.innerText = "Copied!";
         btn.style.background = "linear-gradient(90deg, #10b981, #34d399)";
-        
         setTimeout(() => {
-          btn.innerText = originalText;
+          btn.innerText = original;
           btn.style.background = "linear-gradient(90deg, #7c3aed, #a855f7)";
         }, 1800);
-      }).catch(err => {
-        console.error("Copy failed", err);
       });
     }
   </script>
