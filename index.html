@@ -1,174 +1,249 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Xena Hub | Roblox Script Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VØID X EXPLOITS</title>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
-    :root {
-      --yellow: #ffe600;
-      --glow: rgba(255, 230, 0, 0.6);
-      --bg: #050505;
-      --panel: #101010;
-    }* { box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  margin: 0;
-  background: radial-gradient(circle at top, #1a1a1a, var(--bg));
-  color: #fff;
-  font-family: 'Orbitron', sans-serif;
-}
+    body {
+      background: #0d0015;
+      color: #e0ccff;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-header {
-  padding: 90px 20px 70px;
-  text-align: center;
-}
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
 
-header h1 {
-  font-size: 4rem;
-  color: var(--yellow);
-  text-shadow: 0 0 30px var(--glow);
-  letter-spacing: 4px;
-}
+    .container {
+      position: relative;
+      z-index: 10;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-header p {
-  max-width: 650px;
-  margin: 25px auto 0;
-  color: #ccc;
-  line-height: 1.6;
-}
+    h1 {
+      text-align: center;
+      font-size: 3.8rem;
+      font-weight: 900;
+      letter-spacing: 8px;
+      margin-bottom: 50px;
+      background: linear-gradient(90deg, #c084fc, #a855f7, #d8b4fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(168, 85, 247, 0.7);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
 
-.btn {
-  display: inline-block;
-  margin-top: 40px;
-  padding: 16px 38px;
-  border-radius: 40px;
-  background: var(--yellow);
-  color: #000;
-  text-decoration: none;
-  font-weight: 700;
-  box-shadow: 0 0 35px var(--glow);
-  transition: 0.3s ease;
-}
+    @keyframes glow {
+      from { text-shadow: 0 0 20px rgba(168,85,247,0.6), 0 0 40px rgba(168,85,247,0.4); }
+      to   { text-shadow: 0 0 40px rgba(168,85,247,0.9), 0 0 80px rgba(168,85,247,0.6); }
+    }
 
-.btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 55px var(--glow);
-}
+    .panels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 30px;
+      padding: 20px;
+    }
 
-section {
-  padding: 70px 20px;
-  max-width: 1200px;
-  margin: auto;
-}
+    .card {
+      background: rgba(30, 10, 60, 0.45);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      border-radius: 16px;
+      padding: 28px 24px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5),
+                  inset 0 0 20px rgba(168,85,247,0.12);
+      transition: all 0.35s ease;
+    }
 
-.panels {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-}
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #c084fc;
+      box-shadow: 0 20px 50px rgba(168,85,247,0.35),
+                  inset 0 0 30px rgba(168,85,247,0.18);
+    }
 
-.panel {
-  background: linear-gradient(180deg, #151515, #0a0a0a);
-  border-radius: 22px;
-  padding: 30px;
-  border: 1px solid #222;
-  box-shadow: inset 0 0 20px #000;
-  transition: 0.3s ease;
-  position: relative;
-}
+    .card h2 {
+      font-size: 2.1rem;
+      margin-bottom: 16px;
+      color: #d8b4fe;
+      text-shadow: 0 0 15px rgba(216,180,254,0.7);
+    }
 
-.panel:hover {
-  border-color: var(--yellow);
-  box-shadow: 0 0 40px var(--glow);
-  transform: translateY(-8px);
-}
+    .status {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
 
-.panel h3 {
-  color: var(--yellow);
-  margin-bottom: 10px;
-}
+    .status.online {
+      color: #34d399;
+      text-shadow: 0 0 12px rgba(52, 211, 153, 0.7);
+    }
 
-.status {
-  font-size: 0.85rem;
-  margin-bottom: 15px;
-}
+    .script-code {
+      background: rgba(15, 5, 40, 0.7);
+      border: 1px solid #6b21a8;
+      border-radius: 10px;
+      padding: 16px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.96rem;
+      color: #c4b5fd;
+      margin: 20px 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.6);
+    }
 
-.working { color: #6aff6a; }
-.patched { color: #ff5c5c; }
+    .copy-btn {
+      background: linear-gradient(90deg, #7c3aed, #a855f7);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 6px 20px rgba(168,85,247,0.5);
+      display: block;
+      margin: 16px auto 0;
+    }
 
-pre {
-  background: #000;
-  padding: 15px;
-  border-radius: 14px;
-  overflow-x: auto;
-  font-size: 0.75rem;
-  color: var(--yellow);
-  border: 1px solid #222;
-}
+    .copy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(168,85,247,0.7);
+      background: linear-gradient(90deg, #a855f7, #c084fc);
+    }
 
-.copy-btn {
-  margin-top: 15px;
-  width: 100%;
-  padding: 12px;
-  border-radius: 25px;
-  border: none;
-  background: var(--yellow);
-  color: #000;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 0 20px var(--glow);
-  transition: 0.25s ease;
-}
+    .copy-btn:active {
+      transform: translateY(1px);
+    }
 
-.copy-btn:hover {
-  box-shadow: 0 0 40px var(--glow);
-}
-
-footer {
-  text-align: center;
-  padding: 45px 20px;
-  color: #777;
-  border-top: 1px solid #1c1c1c;
-}
-
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+      color: #a78bfa;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
   </style>
 </head>
-<body><header>
-  <h1>XENA HUB</h1>
-  <p>High-quality Roblox exploit scripts with a clean yellow neon aesthetic.
-     Keyless, powerful, and constantly evolving.</p>
-  <a href="#scripts" class="btn">GET SCRIPTS</a>
-</header><section id="scripts">
-  <div class="panels"><div class="panel">
-  <h3>🚛 Diesel N Steel</h3>
-  <div class="status working">• Keyless • Working</div>
-  <pre id="script1">loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/1552970c67caf8690f5ef9b22a2925cc54ba6760d8e0b165fcd5cee7f71beeb7/download"))()</pre>
-  <button class="copy-btn" onclick="copy('script1')">COPY SCRIPT</button>
-</div>
+<body>
 
-<div class="panel">
-  <h3>🚕 Taxi Boss</h3>
-  <div class="status working">• Keyless • Working</div>
-  <pre id="script2">loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()</pre>
-  <button class="copy-btn" onclick="copy('script2')">COPY SCRIPT</button>
-</div>
+  <div id="particles-js"></div>
 
-<div class="panel">
-  <h3>🧠 Tambay Heneral</h3>
-  <div class="status patched">• Keyless • Patched</div>
-  <pre id="script3">loadstring(game:HttpGet("https://pandadevelopment.net/virtual/file/5ff8cdd0fd7594ad"))()</pre>
-  <button class="copy-btn" onclick="copy('script3')">COPY SCRIPT</button>
-</div>
+  <div class="container">
+    <h1>VØID X EXPLOITS</h1>
 
+    <div class="panels">
+
+      <!-- Script 1 -->
+      <div class="card">
+        <h2>Diesel n Steel Script</h2>
+        <div class="status online">Status: Online</div>
+
+        <div class="script-code" id="script1">
+loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/1552970c67caf8690f5ef9b22a2925cc54ba6760d8e0b165fcd5cee7f71beeb7/download"))()
+        </div>
+
+        <button class="copy-btn" onclick="copyToClipboard('script1')">Copy Script</button>
+      </div>
+
+      <!-- Script 2 -->
+      <div class="card">
+        <h2>Taxi Boss Script</h2>
+        <div class="status online">Status: Online</div>
+
+        <div class="script-code" id="script2">
+loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/8f736d47a5c4b8460edb7ef075ddf8d5d4922d6c28f1e0042f078302f3fff3b1/download"))()
+        </div>
+
+        <button class="copy-btn" onclick="copyToClipboard('script2')">Copy Script</button>
+      </div>
+
+    </div>
+
+    <footer>use at your own risk • 2025–2026</footer>
   </div>
-</section><footer>
-  © 2026 Xena Hub — Not affiliated with Roblox Corporation.
-</footer><script>
-  function copy(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text);
-    alert('Script copied!');
-  }
-</script></body>
-</html> 
+
+  <script>
+    // Particles.js purple theme
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 80, "density": { "enable": true, "value_area": 900 } },
+        "color": { "value": "#a855f7" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.55, "random": true },
+        "size": { "value": 3.5, "random": true },
+        "line_linked": {
+          "enable": true,
+          "distance": 140,
+          "color": "#c084fc",
+          "opacity": 0.35,
+          "width": 1.2
+        },
+        "move": {
+          "enable": true,
+          "speed": 2.5,
+          "direction": "none",
+          "random": true,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": true, "mode": "grab" },
+          "onclick": { "enable": true, "mode": "push" },
+          "resize": true
+        },
+        "modes": {
+          "grab": { "distance": 160, "line_linked": { "opacity": 0.7 } },
+          "push": { "particles_nb": 4 }
+        }
+      },
+      "retina_detect": true
+    });
+
+    // Copy to clipboard function
+    function copyToClipboard(elementId) {
+      const textElement = document.getElementById(elementId);
+      const text = textElement.innerText.trim();
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = textElement.nextElementSibling;
+        const originalText = btn.innerText;
+        btn.innerText = "Copied!";
+        btn.style.background = "linear-gradient(90deg, #10b981, #34d399)";
+        
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.style.background = "linear-gradient(90deg, #7c3aed, #a855f7)";
+        }, 1800);
+      }).catch(err => {
+        console.error("Copy failed", err);
+      });
+    }
+  </script>
+
+</body>
+</html>
